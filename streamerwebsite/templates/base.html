@@ -1,7 +1,13 @@
 <html>
 	<head>
 		<title>Home</title>
-		<link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css" />
+
+		<style>
+			.card .image  img {
+				height:150px !Important;
+			}
+		</style>
 	</head>
 <body>
 
@@ -9,7 +15,7 @@
 	
 <div class="ui container">
 
-	<div class="ui four column grid row">
+	<div class="ui three column grid row">
 		
 		<div class=" left floated column">
 			<h2>Recientes</h2> 
@@ -27,9 +33,9 @@
 		<div class="ui clearing divider "></div>
 		<div class="ui three cards grid   ">
 		{% for obj in page_obj.object_list %}
-			<div class="card">
+			<div class="ui card">
 				<div class="image">
-					<img src="http://placehold.it/350x150" alt="">		
+					<img src="https://placeimg.com/640/480/any" alt="">		
 				</div>
 				<div class="content">
 					<a href="" class="header">
@@ -38,14 +44,16 @@
 					<div class="meta">
 						{{obj.get_type}}
 					</div>
-					<div class="extra content">
-						{% if obj.type == 'ser' %}
-							Episodio: {{obj.get_episode|default:"1"}}	
-						{% endif %}
-						
-					</div>
-
+					
 				</div>		
+			
+				{% if obj.type == 'ser' %}
+					<div class="extra content">
+					Episodio: {{obj.get_episode|default:"1"}}	
+					</div>
+				{% endif %}
+						
+					
 			</div>
 		{% endfor %}
 		</div>

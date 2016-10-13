@@ -5,6 +5,6 @@ from .models import Media
 class Home(ListView):
 	template_name="base.html"
 	model = Media
-	paginate_by = 20
+	paginate_by = 12
 
 home = Home.as_view()
