@@ -1,14 +1,18 @@
 <html>
 	<head>
 		<title>Home</title>
-		<link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css" />
 
-		<style>
-			.card .image  img {
-				height:150px !Important;
-			}
-		</style>
-	</head>
+    <style type="text/css" media="all">
+      .card > .image  {
+        height:210px;
+      }
+
+      .card > .image  img {
+        height:210px;
+      }
+    </style>
+  </head>
 <body>
 
 
@@ -31,11 +35,12 @@
 
 		
 		<div class="ui clearing divider "></div>
-		<div class="ui three cards grid   ">
-		{% for obj in page_obj.object_list %}
+		<div class="ui four column grid   ">
+      {% for obj in page_obj.object_list %}
+  <div class="column">
 			<div class="ui card">
 				<div class="image">
-					<img src="https://placeimg.com/640/480/any" alt="">		
+					<img src="https://placeimg.com/640/480/any" alt="" class="">		
 				</div>
 				<div class="content">
 					<a href="" class="header">
@@ -47,14 +52,25 @@
 					
 				</div>		
 			
-				{% if obj.type == 'ser' %}
-					<div class="extra content">
-					Episodio: {{obj.get_episode|default:"1"}}	
-					</div>
-				{% endif %}
+        <div class="extra content">
+          <span class="ui right floated">
+             {% if obj.type == 'ser' %}
+              Episodio: {{obj.get_episode|default:"001"}}	
+            {% endif %}
+          </span>
+            <button class="mini ui button">
+            720p
+            </button>
+            <button class="mini ui button">
+            1080p
+            </button>
+
+        </div>
 						
 					
-			</div>
+      </div>
+      
+      </div>
 		{% endfor %}
 		</div>
 		<div class="right floated">
