@@ -1,0 +1,4 @@
+honcho
+django
+django-autofixtures
+django-livereload-server
