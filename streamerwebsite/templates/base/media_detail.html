@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="ui row">
 
-  <div class="ui three column grid">
-    <div class="ui row">
-      <div class="column">
-        <img src="https://placeimg.com/256/370/any" alt="" class="">	
+  <div class="ui row ">
+    <div class="ui grid ">
+      <div class=" four  wide column">
+        <img src="http://placehold.it/256x370"/> 
       </div>
-      <div class="column">
-      <h2>
-        {{object.name}}
-      </h2>
+      <div class="twelve  wide column">
+        {{ object.name }}
       </div>
-
     </div>
-    <div class="column">uno</div>
+      
+    </div>
+
+
+  <div class="ui  three  column grid">
+      <div class="column">uno</div>
     <div class="column">dos</div>
     <div class="column">tress</div>
 
   </div>
 
-</div>
 
 {% endblock %}

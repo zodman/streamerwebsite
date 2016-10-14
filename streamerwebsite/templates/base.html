@@ -1,8 +1,12 @@
 <html>
 	<head>
-		<title>Home</title>
-    <link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css" />
+    <title>
+      {% block title  %}
+       Inicio 
+      {% endblock %}
 
+    </title>
+    <link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css" />
     <style type="text/css" media="all">
       .card > .image  {
         height:210px;

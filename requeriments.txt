@@ -1,4 +1,4 @@
 honcho
 django
-django-autofixtures
+django-autofixture
 django-livereload-server

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+Detalle {{object.name}}
+{% endblock %}
+
 {% block content %}
   
 
@@ -37,18 +41,18 @@
 				</div>		
 			
         <div class="extra content">
-          <span class="ui right floated">
-             {% if obj.type == 'ser' %}
-              Episodio: {{obj.get_episode|default:"001"}}	
-            {% endif %}
-          </span>
-            <button class="mini ui button">
-            720p
-            </button>
-            <button class="mini ui button">
-            1080p
-            </button>
 
+          {% with entry as obj.get_last_entry  %}
+          <!-- {{entry|pprint}} -->
+                <span class="ui right floated">
+                   {% if obj.type == 'ser' %}
+                   E{{entry.episode|default:"001"}}xS{{entry.season|default:"001"}}
+                  {% endif %}
+                </span>
+              {% for qua in  entry.get_quality  %}
+              <button class="ui mini button">{{qua}}</button>
+              {% endfor %}
+            {% endwith %}
         </div>
 						
 					

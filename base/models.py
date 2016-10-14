@@ -17,20 +17,31 @@ class Media(models.Model):
     image = models.URLField()
 
     def get_type(self):
-            return dict(self.TYPES).get(self.type)
+        return dict(self.TYPES).get(self.type)
+
+    def get_last_entry(self):
+        last = self.entries.all().last()
+        return last
 
     def __str__(self):
             return self.name
 
 
 class Entry(models.Model):
-    media = models.ForeignKey("Media")
+    media = models.ForeignKey("Media", related_name="entries")
     episode = models.PositiveIntegerField(null=True)
     season = models.PositiveIntegerField(null=True)
 
+    def __unicode__(self):
+        return u"%s" % self.episode
     def __str__(self):
-            return u"%s"%self.episode
+        return u"%s"% self.episode
 
 class Resource(models.Model):
+    QUA = (
+        ('1080p','1080p'),
+        ('720p','720p'),
+    )
     entry = models.ForeignKey("Entry")
     code = models.TextField()
+    quality = models.CharField(max_length=5, choices=QUA)
