@@ -27,66 +27,9 @@
 	
 <div class="ui container">
 
- 
-
-	<div class="ui three column grid row">
-		
-		<div class=" left floated column">
-			<h2>Recientes</h2> 
-    </div>
-		<div class="right floated column">
-			{% include "_pager.html" %}	
-		</div>
-	</div>
-
-
-		
-	
-
-		
-		<div class="ui clearing divider "></div>
-		<div class="ui four column grid   ">
-      {% for obj in page_obj.object_list %}
-  <div class="column">
-			<div class="ui card">
-				<div class="image">
-					<img src="https://placeimg.com/640/480/any" alt="" class="">		
-				</div>
-				<div class="content">
-					<a href="" class="header">
-						{{obj.name|truncatewords:5}}
-					</a>
-					<div class="meta">
-						{{obj.get_type}}
-					</div>
-					
-				</div>		
-			
-        <div class="extra content">
-          <span class="ui right floated">
-             {% if obj.type == 'ser' %}
-              Episodio: {{obj.get_episode|default:"001"}}	
-            {% endif %}
-          </span>
-            <button class="mini ui button">
-            720p
-            </button>
-            <button class="mini ui button">
-            1080p
-            </button>
-
-        </div>
-						
-					
-      </div>
-      
-      </div>
-		{% endfor %}
-		</div>
-		<div class="right floated">
-		{% include "_pager.html" %}	
-		</div>
-		
+{% block content  %}
+  
+{% endblock %}		
 
 
 
