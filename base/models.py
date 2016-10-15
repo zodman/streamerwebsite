@@ -15,6 +15,7 @@ class Media(models.Model):
     slug = models.SlugField(unique=True)
     type = models.CharField(max_length=3, choices = TYPES)
     image = models.URLField()
+    desc = models.TextField()
 
     def get_type(self):
         return dict(self.TYPES).get(self.type)
@@ -31,6 +32,7 @@ class Entry(models.Model):
     media = models.ForeignKey("Media", related_name="entries")
     episode = models.PositiveIntegerField(null=True)
     season = models.PositiveIntegerField(null=True)
+    image = models.ImageField(null=True, blank=True)
 
     def __unicode__(self):
         return u"%s" % self.episode
@@ -45,3 +47,6 @@ class Resource(models.Model):
     entry = models.ForeignKey("Entry")
     code = models.TextField()
     quality = models.CharField(max_length=5, choices=QUA)
+
+    class Meta:
+    	unique_together  = ("entry","quality")

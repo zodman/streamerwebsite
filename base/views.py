@@ -14,3 +14,5 @@ class DetailMedia(DetailView):
     model = Media
     
 detail = DetailMedia.as_view()
+
+view = DetailMedia.as_view()
