@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="ui  stackable sixteen  grid  row">
+		
+		<div class="row column centered ">
+		<h1>
+		<a href="{% url 'detail' object.entry.media.slug %}">{{object.entry.media.name}}</a>
+		</h1> 
+			{{object.entry.episode}}x{{object.entry.season}}
+		<div class="divider"></div>
+			<img src="http://placehold.it/600x500/?text=videoplayer" alt="">	
+		</div>
+	</div>
+	<div class="ui row">
+		<div class="eight grid">
+			<div class="eight wide column">
+				<span>Calidad {{object.quality}}</span>
+			</div>
+			<div class="eight wide column">
+				<span>Fuente {{object.code}}</span>
+				<ul>
+				{% for re in object.get_other_sources  %}
+					<li>
+						<a href="{% url 'view' object.entry.media.slug re.id re.quality%}">{{re.source}} {{re.quality}}</a>
+					</li>
+				{% endfor %}
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+{% endblock content %}

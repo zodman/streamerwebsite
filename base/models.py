@@ -17,6 +17,9 @@ class Media(models.Model):
     image = models.URLField()
     desc = models.TextField()
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def get_type(self):
         return dict(self.TYPES).get(self.type)
 
@@ -33,6 +36,8 @@ class Entry(models.Model):
     episode = models.PositiveIntegerField(null=True)
     season = models.PositiveIntegerField(null=True)
     image = models.ImageField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return u"%s" % self.episode
@@ -44,9 +49,16 @@ class Resource(models.Model):
         ('1080p','1080p'),
         ('720p','720p'),
     )
-    entry = models.ForeignKey("Entry")
+    entry = models.ForeignKey("Entry", related_name="resources")
     code = models.TextField()
     quality = models.CharField(max_length=5, choices=QUA)
+    source = models.CharField(max_length=30)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def get_other_sources(self):
+    	return self.entry.resources.exclude(pk=self.pk)
 
     class Meta:
     	unique_together  = ("entry","quality")
+

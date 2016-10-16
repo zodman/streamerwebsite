@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="ui row grid ">
+<style>
+  
+  .img-holder img {
+    width:100%;
     
-      <div class=" five  wide column">
-        <img src="http://placehold.it/256x370"/> 
+  }
+</style>
+
+<div class="ui stackable row grid ">
+    
+      <div class=" five  wide column img-holder">
+        <img src="http://placehold.it/160x240"/> 
       </div>
 
       <div class="eleven wide column">
@@ -22,16 +29,16 @@
     
 </div>
 <div class="ui row ">
-      {% regroup object.entries.all by season as entries %}
+      {% regroup object.entries.all|dictsortreversed:"season" by season as entries %}
       
         {% for each_entry in  entries %}
         <div class="ui horizontal header divider">
                 <h3> Temporada {{each_entry.grouper }} </h3>
          </div>  
-        <div class="ui four cards grid ">          
+        <div class="ui stackable four cards grid ">          
             {% for  entry in each_entry.list %}
                     <div class=" ui card">
-                        <div class="image">
+                        <div class="image img-holder">
                           <img src="http://placehold.it/250x210">
                         </div>
                         

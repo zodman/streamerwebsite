@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Media
+from .models import Media, Resource
 
 class Home(ListView):
 	template_name="home.html"
@@ -15,4 +15,9 @@ class DetailMedia(DetailView):
     
 detail = DetailMedia.as_view()
 
-view = DetailMedia.as_view()
+class DetailResource(DetailView):
+	model = Resource
+
+
+
+view = DetailResource.as_view()
