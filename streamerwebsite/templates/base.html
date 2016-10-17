@@ -1,36 +1,46 @@
 <html>
-	<head>
-    <title>
-      {% block title  %}
-       Inicio 
-      {% endblock %}
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<title>
+		{% block title  %}
+		Inicio 
+		{% endblock %}
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css" />
+	<link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css" />
 
-  </head>
-<body class="ui inverted">
-
- <div class="ui inverted menu">
-  <a class=" item" href="{% url 'home' %}">
-    Home
-  </a>
-  <a class="item right floated" href="">
-    busqueda
-  </a>
-</div>
-
+</head>
+<body class="">
 	
-<div class="ui container">
+	{% block submenu %}
+	
+	{% endblock submenu %}
+	
+	<div class="ui container">
 
-{% block content  %}
-  
-{% endblock %}		
+	<div class="ui inverted segment">
+		<div class="ui inverted massive menu">
+			<a class=" item active" href="{% url 'home' %}">
+				Hulun&aacute;!
+			</a>
+			<div class="item">
+				PELIS <i class="chevron double down icon"></i>
+
+			</div>
+			<div class="ui icon input inverted transparent">
+				<input type="text" placeholder="Search...">
+				<i class="search icon"></i>
+			</div>
+		</div>
+	</div>
+
+		{% block content  %}
+
+		{% endblock %}		
 
 
 
-</div>
+	</div>
 	<script type="text/javascript" src="{{STATIC_URL}}vue/dist/vue.min.js"></script>
 </body>
 </html>

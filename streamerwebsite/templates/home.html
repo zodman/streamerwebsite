@@ -4,59 +4,59 @@
 Detalle {{object.name}}
 {% endblock %}
 
+
+
 {% block content %}
 
 
-<div class="ui two column grid row">
-
-	<div class="left floated column">
-		<h2>Recientes</h2> 
+<div class="ui  three column padded grid ">
+	
+	<div class="  grey column">
+		<h1 class="header">Popular</h1>
 	</div>
-	<div class="right floated column">
-		{% include "_pager.html" %}	
+	<div class=" grey column">
+		<div class="ui secondary pointing  inverted menu">
+			<a class="active item">
+			Series
+			</a>
+			<a class="item">
+				Peliculas
+			</a>
+			<a class="item">
+				Anime
+			</a>
+
+		</div>
+	</div>
+	
+	<div class="ui grey  column ">
+<img class="ui small image floated right" src="http://nekoanimedd.com/wp-content/uploads/2016/03/logo-r1.png" alt="nekoanimedd">
+	</div>
+	
+</div>
+
+
+<div class="ui clearing hidden divider "></div>
+
+<div class="ui two column padded centered grid">
+	<div class=" column">
+	
+		<img src="https://unsplash.it/400/250/?random" alt="" class="ui image">	
+	
+	</div>
+	<div class=" column">
+		<img src="https://unsplash.it/400/250/?random" alt="" class="ui image">	
 	</div>
 </div>
 
 
-
-
-
-
-<div class="ui clearing divider "></div>
 <div class="ui stackable four column grid   ">
 	{% for obj in page_obj.object_list %}
 	<div class="  column">
-		<div class="ui card">
-			<a href="{% url 'detail' obj.slug %}" class="image">
-				<img src="https://placeimg.com/640/500/any" alt="" class="">	
-			</a>
-			<div class="content">
-				<a href="{% url 'detail' obj.slug %}" class="header">
-					{{obj.name|truncatewords:5}}
-				</a>
-				<div class="meta">
-					{{obj.get_type}}
-				</div>
-
-			</div>		
-			
-			<div class="extra content">
-
-				{% with entry as obj.get_last_entry  %}
-				<!-- {{entry|pprint}} -->
-				<span class="ui right floated">
-					{% if obj.type == 'ser' %}
-					E{{entry.episode|default:"001"}}xS{{entry.season|default:"001"}}
-					{% endif %}
-				</span>
-				{% for qua in  entry.get_quality  %}
-				<button class="ui mini button">{{qua}}</button>
-				{% endfor %}
-				{% endwith %}
-			</div>
-
-
-		</div>
+		
+		<a href="{% url 'detail' obj.slug %}" class="image">
+			<img src="https://unsplash.it/200/150/?random" alt="" class="">	
+		</a>
 
 	</div>
 	{% endfor %}
