@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Detalle {{object.name}}
+Inicio
 {% endblock %}
 
 
@@ -9,7 +9,7 @@ Detalle {{object.name}}
 {% block content %}
 
 
-<div class="ui  three column padded grid ">
+<div class="ui  three column padded centered grid  ">
 	
 	<div class="  grey column">
 		<h1 class="header">Popular</h1>
@@ -29,7 +29,7 @@ Detalle {{object.name}}
 		</div>
 	</div>
 	
-	<div class="ui grey  column ">
+	<div class="ui grey  column centered  ">
 <img class="ui small image floated right" src="http://nekoanimedd.com/wp-content/uploads/2016/03/logo-r1.png" alt="nekoanimedd">
 	</div>
 	
@@ -38,29 +38,32 @@ Detalle {{object.name}}
 
 <div class="ui clearing hidden divider "></div>
 
-<div class="ui two column padded centered grid">
-	<div class=" column">
+<div class="ui two column padded   grid">
+	<div class="   column">
 	
-		<img src="https://unsplash.it/400/250/?random" alt="" class="ui image">	
+		<img src="https://unsplash.it/400/250/?random" alt="" class="ui centered big image">	
 	
 	</div>
-	<div class=" column">
-		<img src="https://unsplash.it/400/250/?random" alt="" class="ui image">	
+	<div class="   column">
+		<img src="https://unsplash.it/400/250/?random" alt="" class="ui centered big image">	
 	</div>
 </div>
 
 
-<div class="ui stackable four column grid   ">
+<div class="ui  four column  grid   ">
 	{% for obj in page_obj.object_list %}
-	<div class="  column">
+	<div class="column">
 		
-		<a href="{% url 'detail' obj.slug %}" class="image">
-			<img src="https://unsplash.it/200/150/?random" alt="" class="">	
+			
+		<a href="{% url 'detail' obj.slug %}" class="">
+			<img src="https://unsplash.it/200/150/?random" alt="" class=" ui  centered medium  image ">	
 		</a>
+
 
 	</div>
 	{% endfor %}
 </div>
+
 <div class="right floated">
 	{% include "_pager.html" %}	
 </div>

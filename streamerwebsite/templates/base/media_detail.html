@@ -1,18 +1,14 @@
 {% extends "base.html" %}
-
+{% block  title %}
+{{object.name}}
+{% endblock  %}
 {% block content %}
-<style>
-  
-  .img-holder img {
-    width:100%;
-    
-  }
-</style>
+
 
 <div class="ui stackable row grid ">
     
       <div class=" five  wide column img-holder">
-        <img src="http://placehold.it/160x240"/> 
+        <img src="http://placehold.it/160x240" class="ui centered medium image"/> 
       </div>
 
       <div class="eleven wide column">
@@ -35,11 +31,11 @@
         <div class="ui horizontal header divider">
                 <h3> Temporada {{each_entry.grouper }} </h3>
          </div>  
-        <div class="ui stackable four cards grid ">          
+        <div class="ui stackable cards  ">          
             {% for  entry in each_entry.list %}
                     <div class=" ui card">
                         <div class="image img-holder">
-                          <img src="http://placehold.it/250x210">
+                          <img src="http://placehold.it/150x110" class="ui centered  image "/>
                         </div>
                         
                           {% if object.type == 'ser' %}
