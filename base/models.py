@@ -35,7 +35,7 @@ class Entry(models.Model):
     media = models.ForeignKey("Media", related_name="entries")
     episode = models.PositiveIntegerField(null=True)
     season = models.PositiveIntegerField(null=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -56,6 +56,7 @@ class Resource(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     def get_other_sources(self):
     	return self.entry.resources.exclude(pk=self.pk)
 
