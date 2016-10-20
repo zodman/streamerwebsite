@@ -13,8 +13,10 @@
 
       <div class="eleven wide column">
           <h1>
-            {{ object.name }}
+            {{ object.name }}  
           </h1>  
+          <h2>  {{object.get_type}}</h2>
+
           <div class="ui raised segment ">
               <div class="ui horizontal header divider">
                 <h3>Sipnosis</h3>
@@ -29,7 +31,11 @@
       
         {% for each_entry in  entries %}
         <div class="ui horizontal header divider">
-                <h3> Temporada {{each_entry.grouper }} </h3>
+            {% if object.type == 'ser' %}
+              <h3> Temporada {{each_entry.grouper }} </h3>
+            {% else %}
+              <h3> Pelicula </h3>
+            {% endif %}
          </div>  
         <div class="ui stackable cards  ">          
             {% for  entry in each_entry.list %}
