@@ -1,0 +1,3 @@
+[submodule "trakt_tool"]
+	path = trakt_tool
+	url = ./trakt_tool/
