@@ -8,7 +8,7 @@
 <div class="ui stackable row grid ">
     
       <div class=" five  wide column img-holder">
-        <img src="http://placehold.it/160x240" class="ui centered medium image"/> 
+        <img src="{{object.image|default:"http://placehold.it/160x240"}}" class="ui centered medium image"/> 
       </div>
 
       <div class="eleven wide column">
@@ -21,7 +21,7 @@
               <div class="ui horizontal header divider">
                 <h3>Sipnosis</h3>
               </div>  
-              <p>{% lorem   %}</p>
+              <p>{{object.desc}}</p>
           </div>
       </div>
     

@@ -56,7 +56,7 @@ Inicio
 		
 			
 		<a href="{% url 'detail' obj.slug %}" class="">
-			<img src="https://unsplash.it/200/150/?random" alt="" class=" ui  centered medium  image ">	
+			<img src="{{obj.image|default:'https://unsplash.it/200/150/?random'}}" alt="" class=" ui  centered medium  image ">	
 		</a>
 
 
