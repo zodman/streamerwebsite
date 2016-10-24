@@ -3,20 +3,20 @@ from django.views.generic import ListView, DetailView
 from .models import Media, Resource
 
 class Home(ListView):
-	template_name="home.html"
-	model = Media
-	paginate_by = 20
+    template_name="home.html"
+    model = Media
+    paginate_by = 20
 
 home = Home.as_view()
 
 
 class DetailMedia(DetailView):
     model = Media
-    
+
 detail = DetailMedia.as_view()
 
 class DetailResource(DetailView):
-	model = Resource
+    model = Resource
 
 
 

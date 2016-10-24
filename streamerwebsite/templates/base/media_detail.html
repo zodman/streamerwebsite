@@ -41,7 +41,7 @@
             {% for  entry in each_entry.list %}
                     <div class=" ui card">
                         <div class="image img-holder">
-                          <img src="http://placehold.it/150x110" class="ui centered  image "/>
+                          <img src="{{entry.image|default:"http://placehold.it/150x110"}}" class="ui centered  image "/>
                         </div>
                         
                           {% if object.type == 'ser' %}
@@ -50,9 +50,12 @@
                           </div>
                           {% endif %}
                         
-                        <div class="extra content center aligned">
-                          <a href="{% url 'view' object.slug entry.id '720p'%}" class="ui red label"> 720p</a>
-                          <a href="{% url 'view' object.slug entry.id '1080p'%}" class="ui blue label"> 1080p</a>
+                          <div class="extra content center aligned">
+                            {% for re in entry.resources.all  %}
+                              <a href="{% url 'view' object.slug re.id '720p'%}" class="ui red label"> 
+                                {{re.quality}}
+                              </a>
+                            {% endfor %}
                         </div>
 
                     </div>

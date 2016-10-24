@@ -13,10 +13,11 @@ class Media(models.Model):
     )	
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
+    trakt_slug = models.SlugField()
     type = models.CharField(max_length=3, choices = TYPES)
     image = models.URLField()
     desc = models.TextField()
-
+    is_anime = models.BooleanField(default = False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -28,21 +29,21 @@ class Media(models.Model):
         return last
 
     def __str__(self):
-            return self.name
+        return self.name
 
 
 class Entry(models.Model):
     media = models.ForeignKey("Media", related_name="entries")
-    episode = models.PositiveIntegerField(null=True)
-    season = models.PositiveIntegerField(null=True)
+    episode = models.PositiveIntegerField(null=True,blank=True)
+    season = models.PositiveIntegerField(null=True, blank=True)
     image = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return u"%s" % self.episode
+        return u"%s" % self.media
     def __str__(self):
-        return u"%s"% self.episode
+        return u"%s"% self.media
 
 class Resource(models.Model):
     QUA = (
@@ -57,9 +58,12 @@ class Resource(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return "%s %s" % (self.entry, self.quality)
+
     def get_other_sources(self):
-    	return self.entry.resources.exclude(pk=self.pk)
+        return self.entry.resources.exclude(pk=self.pk)
 
     class Meta:
-    	unique_together  = ("entry","quality")
+        unique_together  = ("entry","quality")
 

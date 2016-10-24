@@ -7,7 +7,7 @@ from base.views import detail, home, view
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',home , name="home"),
-     url(r'^detalle/(?P<slug>[-\w]+)/(?P<pk>[\d]+)/(?P<qua>[\w]+)',view, name="view"),
+    url(r'^detalle/(?P<slug>[-\w]+)/(?P<pk>[\d]+)/(?P<qua>[\w]+)',view, name="view"),
     url(r'^detalle/(?P<slug>[-\w]+)/$',detail , name="detail"),
    
 ] + staticfiles_urlpatterns()

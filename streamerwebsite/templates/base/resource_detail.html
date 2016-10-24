@@ -4,10 +4,12 @@
 	<div class="ui  stackable sixteen  grid  row">
 		
 		<div class="row column centered ">
-		<h1>
+	<h1>
 		<a href="{% url 'detail' object.entry.media.slug %}">{{object.entry.media.name}}</a>
-		</h1> 
-			{{object.entry.episode}}x{{object.entry.season}}
+  </h1>
+    {% if object.entry.episode %}
+			{{object.entry.episode}}x{{object.entry.season|default:""}}
+    {% endif %}
 		<div class="divider"></div>
 			<img src="http://placehold.it/600x500/?text=videoplayer" alt="">	
 		</div>

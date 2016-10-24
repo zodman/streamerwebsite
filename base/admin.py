@@ -9,4 +9,8 @@ class EntryAdmin(admin.ModelAdmin):
     list_display = ("__str__", "media", "episode", "season")
 
 admin.site.register(Entry, EntryAdmin)
-admin.site.register(Resource)
+
+class ResourceAdmin(admin.ModelAdmin):
+    list_display = ("entry", "quality", "source")
+
+admin.site.register(Resource, ResourceAdmin)
