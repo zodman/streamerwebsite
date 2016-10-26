@@ -28,7 +28,13 @@ class Media(models.Model):
         last = self.entries.all().last()
         return last
 
-    def __str__(self):
+    #@permalink
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse('detail', args=[self.slug])
+
+    def __unicode__(self):
         return self.name
 
 
@@ -42,8 +48,7 @@ class Entry(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.media
-    def __str__(self):
-        return u"%s"% self.media
+
 
 class Resource(models.Model):
     QUA = (

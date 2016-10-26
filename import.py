@@ -21,6 +21,7 @@ def cli():
 @click.option("--is-anime", is_flag=True, default=False)
 def media(name, is_anime):
     """ create movie, serie or anime """
+    name = " ".join(name)
     result = gen_api(name, is_anime)
     name = result.get("trakt").get("title")
     trakt_slug = result.get("trakt").get("ids").get("slug")
@@ -42,7 +43,9 @@ def media(name, is_anime):
 def entry(slug, file_or_pattern):
     media = Media.objects.get(slug=slug)
     click.echo("%s %s type: %s" % (media.name,media.trakt_slug, media.get_type()))
+    print (file_or_pattern,)
     for file in formic.FileSet(include=file_or_pattern):
+
         guessit_result = guessit.guessit(file)
         if media.type == "mov":
             res = gen_api(media.trakt_slug, media.is_anime)
@@ -53,7 +56,7 @@ def entry(slug, file_or_pattern):
             image  = random.choice(res.get("tmdb").get("posters"))
             entry = Entry.objects.create(media=media, image=image)
 
-        qua = guessit_result.get("screen_size")
+        qua = guessit_result.get("screen_size","720p")
         resource = Resource.objects.create(entry=entry, quality=qua)
         source , ret = upload(file)
         resource.source = source
@@ -61,7 +64,14 @@ def entry(slug, file_or_pattern):
         resource.save()
 
 def upload(file):
+    # TODO: openload uptobox
+
+    # SOLIDFILES
     ret = upload_file(file, "solidfiles")
+    ret = ret.replace("/v/","/e/")
+    ret_tmp = """
+    <iframe src="{}" width="640" height="360" scrolling="no" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+    """.format(ret)
     return ("solidfiles", ret.strip())
 
 

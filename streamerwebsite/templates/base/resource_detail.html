@@ -11,7 +11,7 @@
 			{{object.entry.episode}}x{{object.entry.season|default:""}}
     {% endif %}
 		<div class="divider"></div>
-			<img src="http://placehold.it/600x500/?text=videoplayer" alt="">	
+			{{object.code|safe}}
 		</div>
 	</div>
 	<div class="ui row">
@@ -20,7 +20,7 @@
 				<span>Calidad {{object.quality}}</span>
 			</div>
 			<div class="eight wide column">
-				<span>Fuente {{object.code}}</span>
+				<span>Fuente {{object.source}}</span>
 				<ul>
 				{% for re in object.get_other_sources  %}
 					<li>
