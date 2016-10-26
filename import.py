@@ -49,15 +49,15 @@ def entry(slug, file_or_pattern):
         guessit_result = guessit.guessit(file)
         if media.type == "mov":
             res = gen_api(media.trakt_slug, media.is_anime)
-            image  = random.choice(res.get("tmdb").get("posters"))
+            image  = random.choice(res.get("tmdb").get("posters",[]))
             entry = Entry.objects.create(media=media, image=image)
         elif media.type == "ser":
             res = gen_api(media.trakt_slug, media.is_anime)
-            image  = random.choice(res.get("tmdb").get("posters"))
+            image  = random.choice(res.get("tmdb").get("posters",[]))
             entry = Entry.objects.create(media=media, image=image)
 
         qua = guessit_result.get("screen_size","720p")
-        resource = Resource.objects.create(entry=entry, quality=qua)
+        resource = Resource(entry=entry, quality=qua)
         source , ret = upload(file)
         resource.source = source
         resource.code = ret
