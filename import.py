@@ -31,8 +31,11 @@ def media(name, is_anime):
     desc = result.get("trakt").get("overview")
     media,created  = Media.objects.get_or_create(name=name, slug=
             slugify.slugify(name),defaults=dict(is_anime=is_anime,trakt_slug=trakt_slug, 
-                                             type=type, desc=desc, image =
-                                             image))
+                                             type=type, desc=desc, image=image,
+                                             api =result))
+    if not created:
+        media.api = result
+        media.save()
 
     click.echo(">>>>>>> {} {}".format(media.id, media.slug))
 

@@ -4,6 +4,7 @@
 # made by zodman
 from __future__ import unicode_literals
 from django.db import models
+import jsonfield
 
 
 class Media(models.Model):
@@ -17,6 +18,7 @@ class Media(models.Model):
     type = models.CharField(max_length=3, choices = TYPES)
     image = models.URLField()
     desc = models.TextField()
+    api = jsonfield.JSONField()
     is_anime = models.BooleanField(default = False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

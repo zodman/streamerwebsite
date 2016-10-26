@@ -11,4 +11,4 @@ shelljob
 trakt
 tmdb3
 pytvdbapi
-yandex.translation
+yandex.translate
