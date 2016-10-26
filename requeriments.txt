@@ -2,9 +2,6 @@ honcho
 django
 django-autofixture
 django-livereload-server
-tmdb3
-click
-pytvdbapi
 webscraping
 requests
 slugify
@@ -15,3 +12,4 @@ click
 trakt
 tmdb3
 pytvdbapi
+yandex.translation
