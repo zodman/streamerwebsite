@@ -2,9 +2,6 @@ honcho
 django
 django-autofixture
 django-livereload-server
-tmdb3
-click
-pytvdbapi
 webscraping
 requests
 slugify
@@ -12,3 +9,6 @@ formic==0.9beta3
 guessit
 shelljob
 trakt
+tmdb3
+pytvdbapi
+yandex.translation
