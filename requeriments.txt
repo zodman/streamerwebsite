@@ -8,10 +8,7 @@ pytvdbapi
 webscraping
 requests
 slugify
-formic
+formic==0.9beta3
 guessit
 shelljob
-click
 trakt
-tmdb3
-pytvdbapi
