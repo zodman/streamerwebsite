@@ -72,7 +72,7 @@ def upload(file):
     ret_tmp = """
     <iframe src="{}" width="640" height="360" scrolling="no" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
     """.format(ret)
-    return ("solidfiles", ret.strip())
+    return ("solidfiles", ret_tmp.strip())
 
 
 def upload_file(file, source ):
