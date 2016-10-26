@@ -10,62 +10,58 @@ Inicio
 
 
 <div class="ui  three column padded centered grid  ">
-	
-	<div class="  grey column">
-		<h1 class="header">Popular</h1>
-	</div>
-	<div class=" grey column">
-		<div class="ui secondary pointing  inverted menu">
-			<a class="active item">
-			Series
-			</a>
-			<a class="item">
-				Peliculas
-			</a>
-			<a class="item">
-				Anime
-			</a>
+    
+    <div class="  grey column">
+        <h1 class="header">Popular</h1>
+    </div>
+    <div class=" grey column">
+        <div class="ui secondary pointing  inverted menu">
+            <a class="active item">
+            Series
+            </a>
+            <a class="item">
+                Peliculas
+            </a>
+            <a class="item">
+                Anime
+            </a>
 
-		</div>
-	</div>
-	
-	<div class="ui grey  column centered  ">
+        </div>
+    </div>
+    
+    <div class="ui grey  column centered  ">
 <img class="ui small image floated right" src="http://nekoanimedd.com/wp-content/uploads/2016/03/logo-r1.png" alt="nekoanimedd">
-	</div>
-	
+    </div>
+    
 </div>
 
 
 <div class="ui clearing hidden divider "></div>
 
 <div class="ui two column padded   grid">
-	<div class="   column">
-	
-		<img src="https://unsplash.it/400/250/?random" alt="" class="ui centered big image">	
-	
-	</div>
-	<div class="   column">
-		<img src="https://unsplash.it/400/250/?random" alt="" class="ui centered big image">	
-	</div>
+    <div class="   column">
+    
+        <img src="https://unsplash.it/400/250/?random" alt="" class="ui centered big image">    
+    
+    </div>
+    <div class="   column">
+        <img src="https://unsplash.it/400/250/?random" alt="" class="ui centered big image">    
+    </div>
 </div>
 
 
 <div class="ui  four column  grid   ">
-	{% for obj in page_obj.object_list %}
-	<div class="column">
-		
-			
-		<a href="{% url 'detail' obj.slug %}" class="">
-			<img src="{{obj.image|default:'https://unsplash.it/200/150/?random'}}" alt="" class=" ui  centered medium  image ">	
-		</a>
-
-
-	</div>
-	{% endfor %}
+    {% for obj in page_obj.object_list %}
+    <div class="column">            
+        <a href="{% url 'detail' obj.slug %}" class="">
+            <img src="{{obj.image|default:'https://unsplash.it/200/150/?random'}}" alt="" class=" ui  centered medium  image "> 
+        </a>
+    </div>
+    {% endfor %}
 </div>
 
 <div class="right floated">
-	{% include "_pager.html" %}	
+    {% include "_pager.html" %} 
 </div>
 
 {% endblock %}

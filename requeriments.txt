@@ -11,3 +11,7 @@ slugify
 formic
 guessit
 shelljob
+click
+trakt
+tmdb3
+pytvdbapi
