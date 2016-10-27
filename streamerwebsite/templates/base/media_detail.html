@@ -117,7 +117,9 @@
         {% endfor %}
       </div>
 
-      <div class="ui row ">
+      <div class="ui  grid">
+        <div class="ten wide column">
+          
                 <div class="ui minimal centered comments">
                 <h3 class="ui dividing header">Commentarios</h3>
                   {% for c in object.api.trakt.comments  %}
@@ -136,7 +138,18 @@
                   </div>      
                   {% endfor %}
                 </div>
+ 
+        
+              </div>
+        <div class="six wide column">
+            Related
+          <img src="https://unsplash.it/400/250/?random" alt="" class="ui centered image">    
+          <img src="https://unsplash.it/400/250/?random" alt="" class="ui centered image">   
+          
+          </div>
 
+      </div>
+       
       </div>
 
 </div>
