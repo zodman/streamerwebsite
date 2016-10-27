@@ -3,6 +3,7 @@
 {{object.name}}
 {% endblock  %}
 {% block content %}
+<div class="ui container">
 
 
 <div class="ui stackable row grid ">
@@ -24,8 +25,10 @@
               <p>{{object.desc}}</p>
             </div>
             <div class="ui raised segment">
-              <p>
-                <div class="ui  statistic">
+              <div class="ui  grid">
+              
+             <div class="five wide column">
+                <div class="ui red large statistic">
                   <div class="value">
                   {{object.api.trakt.rating|floatformat}}  
                     <i class="thumbs up icon"></i>
@@ -34,37 +37,45 @@
                     Calificación
                   </div>
                 </div>
-              </p>
-              <p>
-                generos: 
+              </div>
+             <div class="five wide column">
+                <div class="ui blue large statistic">
+                  <div class="value">
+                  {{object.api.trakt.votes|floatformat}}  
+                  </div>
+                  <div class="label">
+                    Votos
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="five wide column">
+                <h3 class="ui dividing header">Generos</h3>
                 <ul>
                 {% for i in object.api.trakt.genres %}
                 <li> {{i|capfirst}}</li>
                   {% endfor %}
                 </ul>
-              </p>
-              <p> cast {{object.api.trakt.cast|pprint}}</p>
-              <p>
-                alias 
+              </div>
+              <div class="sixteen wide column">
+                <h3 class="ui dividing header">Alias</h3>
                 <ul>
                   {% for a in object.api.trakt.alias  %}
-                    
                   <li>
                     <i class="ui {{a.country}} flag" /> {{a.title}}
                   </li>
                   {% endfor %}
                 </ul>
-              </p>
-              <p> 
-                comments 
-                <ul>
-                  {% for c in object.api.trakt.comments  %}
-                    
-                    <li>{{c.text}}</li>
-                  {% endfor %}
-                </ul>
-              </p>
+              </div>
 
+              <div class="eight wide column"> 
+                cast {{object.api.trakt.cast|pprint}}
+              </div>
+              
+              
+              </div>
+             
             </div>
       </div>
 </div>
@@ -104,5 +115,29 @@
               {% endfor %}
           </div>
         {% endfor %}
+      </div>
+
+      <div class="ui row ">
+                <div class="ui minimal centered comments">
+                <h3 class="ui dividing header">Commentarios</h3>
+                  {% for c in object.api.trakt.comments  %}
+                  <div class="comment">
+                      <a class="avatar">
+                        <img style="height:auto;" src="https://api.adorable.io/avatars/40x40/{{c.username}}.png" >
+                      </a>
+                      <div class="content">
+                          <span class="author">
+                            {{c.name|default:c.username}}
+                          </span>
+                          <div class="text">
+                              {{c.text}}
+                          </div>
+                      </div>
+                  </div>      
+                  {% endfor %}
+                </div>
+
+      </div>
+
 </div>
 {% endblock %}
