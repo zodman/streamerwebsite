@@ -12,3 +12,4 @@ trakt
 tmdb3
 pytvdbapi
 yandex.translate
+django-embed-video

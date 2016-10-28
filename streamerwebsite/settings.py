@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'base',
     'autofixture',
     'livereload',
+    'embed_video',
 ]
 
 MIDDLEWARE = [

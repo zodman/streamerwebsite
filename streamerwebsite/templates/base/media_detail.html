@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load embed_video_tags %}
 {% block  title %}
 {{object.name}}
 {% endblock  %}
@@ -50,7 +51,7 @@
               </div>
 
 
-              <div class="five wide column">
+              <div class="six wide column">
                 <h3 class="ui dividing header">Generos</h3>
                 <ul>
                 {% for i in object.api.trakt.genres %}
@@ -68,9 +69,27 @@
                   {% endfor %}
                 </ul>
               </div>
+      </div>
+      <div class="ui grid">
 
-              <div class="eight wide column"> 
-                cast {{object.api.trakt.cast|pprint}}
+              <div class="sixteen wide column"> 
+
+                <h3 class="ui dividing header">Cast</h3>
+                <div class="ui grid ">
+                {% for p in object.api.trakt.people  %}
+                    {% if p.image %}
+                <div class="four wide column centered ">
+                      <img src="{{p.image}}" class="ui small circular image" />
+                  <div class="ui middle aligned content centered">
+                    <p class="ui centered"> 
+                      {{p.name}}
+                    </p>
+                  </div>
+                </div>
+                  
+                    {% endif %}
+                {% endfor %}
+                </div>
               </div>
               
               
@@ -117,8 +136,8 @@
         {% endfor %}
       </div>
 
-      <div class="ui  grid">
-        <div class="ten wide column">
+      <div class="ui  stackable grid">
+        <div class="nine wide column">
           
                 <div class="ui minimal centered comments">
                 <h3 class="ui dividing header">Commentarios</h3>
@@ -142,10 +161,9 @@
         
               </div>
         <div class="six wide column">
-            Related
-          <img src="https://unsplash.it/400/250/?random" alt="" class="ui centered image">    
-          <img src="https://unsplash.it/400/250/?random" alt="" class="ui centered image">   
-          
+            {% for i in object.api.tmdb.trailers%} 
+                          {% video  i %}
+            {% endfor %}
           </div>
 
       </div>
