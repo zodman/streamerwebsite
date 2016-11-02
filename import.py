@@ -26,9 +26,12 @@ def media(name, is_anime):
     name = result.get("trakt").get("title")
     trakt_slug = result.get("trakt").get("ids").get("slug")
     type = "mov" if result.get("type",False) else 'ser'
-
-    image = random.choice(result.get("tmdb").get("posters"))
-    desc = result.get("trakt").get("overview")
+    posters = result.get("tmdb", {}).get("posters", [])
+    if posters:
+        image = random.choice(posters)
+    else:
+        image = ""
+    desc = result.get("trakt",{}).get("overview","")
     media,created  = Media.objects.get_or_create(name=name, slug=
             slugify.slugify(name),defaults=dict(is_anime=is_anime,trakt_slug=trakt_slug, 
                                              type=type, desc=desc, image=image,

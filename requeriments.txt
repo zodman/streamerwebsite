@@ -13,3 +13,6 @@ tmdb3
 pytvdbapi
 yandex.translate
 django-embed-video
+django-jsonfield
+click
+kn3
