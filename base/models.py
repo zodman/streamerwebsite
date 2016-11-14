@@ -23,6 +23,9 @@ class Media(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ("-created_at",)
+
     def get_type(self):
         return dict(self.TYPES).get(self.type)
 

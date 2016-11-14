@@ -76,33 +76,30 @@
       </div>
 </div>
 
+{% if object.api.trakt.people %}
 <div class="ui row">
       <div class="ui grid">
-
-              <div class="sixteen wide column"> 
-
+              <div class="sixteen wide column">
                 <h3 class="ui dividing header">Cast</h3>
                 <div class="ui grid ">
                 {% for p in object.api.trakt.people|slice:":8"  %}
                     {% if p.image %}
-                <div class="four wide column centered ">
-                      <img src="{{p.image}}" class="ui small circular image" />
-                  <div class="ui middle aligned content centered">
-                    <p class="ui centered"> 
-                      {{p.name}}
-                    </p>
-                  </div>
-                </div>
-                  
+                          <div class="four wide column centered ">
+                                <img src="{{p.image}}" class="ui small circular image" />
+                            <div class="ui middle aligned content centered">
+                              <p class="ui centered">
+                                {{p.name}}
+                              </p>
+                            </div>
+                          </div>
                     {% endif %}
                 {% endfor %}
                 </div>
               </div>
-              
-              
-    </div>
+      </div>
 </div>
 
+{% endif %}
 <div class="ui row ">
       {% regroup object.entries.all|dictsortreversed:"season" by season as entries %}
       
