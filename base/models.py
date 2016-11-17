@@ -64,7 +64,7 @@ class Resource(models.Model):
     code = models.TextField()
     quality = models.CharField(max_length=5, choices=QUA)
     source = models.CharField(max_length=30)
-
+    original_url = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

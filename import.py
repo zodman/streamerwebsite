@@ -76,9 +76,10 @@ def entry(slug, files, season, episode):
 
         qua = guessit_result.get("screen_size","720p")
         resource = Resource(entry=entry, quality=qua)
-        source , ret = upload(file)
+        source , ret, original_url = upload(file)
         resource.source = source
         resource.code = ret
+        resource.original_url = original_url
         resource.save()
 
 def upload(file):
@@ -95,7 +96,7 @@ def upload_openload(file):
     <iframe src="{}" width="640" height="360" scrolling="no" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
     """.format(url)
 
-    return ("openload",ret_tmp.strip())
+    return ("openload",ret_tmp.strip(), res_url)
 
 def upload_solidfiles(file):
     ret = upload_file(file, "solidfiles", "pelana@protonmail.com:zxczxc")
