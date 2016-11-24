@@ -14,3 +14,5 @@ class ResourceAdmin(admin.ModelAdmin):
     list_display = ("entry", "quality", "source")
 
 admin.site.register(Resource, ResourceAdmin)
+
+admin.site.register(MainMedia)

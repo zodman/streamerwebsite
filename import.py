@@ -66,7 +66,7 @@ def entry(slug, file_or_pattern):
         resource = Resource(entry=entry, quality=qua)
         source , ret = upload(file)
         resource.source = source
-        resource.code = ret
+        resource.code = ret.strip()
         resource.save()
 
 def upload(file):

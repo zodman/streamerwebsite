@@ -4,6 +4,20 @@
 {{object.name}}
 {% endblock  %}
 {% block content %}
+
+<style type="text/css" media="screen">
+body {
+    background: url("{{object.api.tmdb.backdrops.0}}");
+    background-size:cover;
+  background-repeat: no-repeat;
+      background-attachment: fixed;
+}
+ .grid {
+     background: rgba(255,255,255,0.5);
+}
+
+</style>
+
 <div class="ui container">
 
 
@@ -76,6 +90,32 @@
       </div>
 </div>
 
+
+{% if   object.api.tvdb.fanarts %}
+    
+<div class="ui row">
+      <div class="ui grid">
+
+              <div class="sixteen wide column"> 
+
+                <div class="ui grid ">
+                {% for p in object.api.tvdb.fanarts  %}
+                    {% if p %}
+                <div class="four wide column centered ">
+                      <img src="{{p}}" class="ui medium image" />
+                  </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+              </div>
+              
+              
+    </div>
+</div>
+{% endif %}
+
+{% if   object.api.trakt.people %}
+    
 <div class="ui row">
       <div class="ui grid">
 
@@ -102,6 +142,7 @@
               
     </div>
 </div>
+{% endif %}
 
 <div class="ui row ">
       {% regroup object.entries.all|dictsortreversed:"season" by season as entries %}
@@ -145,7 +186,7 @@
         <div class="nine wide column">
           
                 <div class="ui minimal centered comments">
-                <h3 class="ui dividing header">Commentarios</h3>
+                <h3 class="ui dividing header">Comentarios</h3>
                   {% for c in object.api.trakt.comments  %}
                   <div class="comment">
                       <a class="avatar">
@@ -168,7 +209,13 @@
         <div class="six wide column">
             {% for i in object.api.tmdb.trailers%} 
                           {% video  i %}
+            
             {% endfor %}
+
+            {% for i in object.api.tmdb.posters%} 
+            <img src="{{i}}" class="ui spaced image" alt="{{object.title}}">
+            {% endfor %}
+
           </div>
 
       </div>
