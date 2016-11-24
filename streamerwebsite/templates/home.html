@@ -16,10 +16,10 @@ Inicio
     </div>
     <div class=" grey column">
         <div class="ui secondary pointing  inverted menu">
-            <a class="active item">
+            <a class=" {% if active == "series" %} active {% endif %} item" href="{% url 'filter-home' 'series' %}">
             Series
             </a>
-            <a class="item">
+            <a class="item {% if active == "movies" %} active {% endif %}" href="{% url 'filter-home' 'movies' %}">
                 Peliculas
             </a>
             <a class="item">
