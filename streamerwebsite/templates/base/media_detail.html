@@ -90,6 +90,7 @@ body {
       </div>
 </div>
 
+<<<<<<< HEAD
 
 {% if   object.api.tvdb.fanarts %}
     
@@ -116,34 +117,33 @@ body {
 
 {% if   object.api.trakt.people %}
     
+=======
+{% if object.api.trakt.people %}
+>>>>>>> 637f4781a51f39383e2b870f7c506705904009ce
 <div class="ui row">
       <div class="ui grid">
-
-              <div class="sixteen wide column"> 
-
+              <div class="sixteen wide column">
                 <h3 class="ui dividing header">Cast</h3>
                 <div class="ui grid ">
                 {% for p in object.api.trakt.people|slice:":8"  %}
                     {% if p.image %}
-                <div class="four wide column centered ">
-                      <img src="{{p.image}}" class="ui small circular image" />
-                  <div class="ui middle aligned content centered">
-                    <p class="ui centered"> 
-                      {{p.name}}
-                    </p>
-                  </div>
-                </div>
-                  
+                          <div class="four wide column centered ">
+                                <img src="{{p.image}}" class="ui small circular image" />
+                            <div class="ui middle aligned content centered">
+                              <p class="ui centered">
+                                {{p.name}}
+                              </p>
+                            </div>
+                          </div>
                     {% endif %}
                 {% endfor %}
                 </div>
               </div>
-              
-              
-    </div>
+      </div>
 </div>
 {% endif %}
 
+{% endif %}
 <div class="ui row ">
       {% regroup object.entries.all|dictsortreversed:"season" by season as entries %}
       
