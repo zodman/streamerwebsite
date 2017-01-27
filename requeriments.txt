@@ -16,3 +16,5 @@ django-embed-video
 django-jsonfield
 click
 kn3
+sorl.thumbnail
+

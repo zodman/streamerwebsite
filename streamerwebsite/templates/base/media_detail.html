@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load embed_video_tags %}
+{% load embed_video_tags  thumbnail %}
 {% block  title %}
 {{object.name}}
 {% endblock  %}
@@ -90,16 +90,19 @@ body {
     </div>
 
 
-    {% if   object.api.tvdb.fanarts %}
+    {% if   object.api.tvdb.fanarts%}
+    <!-- fan arts -->
         <div class="ui row">
                   <div class="ui grid">
                       <div class="sixteen wide column"> 
 
                         <div class="ui grid ">
-                        {% for p in object.api.tvdb.fanarts  %}
+                        {% for p in object.api.tvdb.fanarts|slice:':8'  %}
                             {% if p %}
-                        <div class="four wide column centered ">
-                              <img src="{{p}}" class="ui medium image" />
+                            <div class="four wide column centered ">
+                                {% thumbnail p  "300x200" as p %}
+                                <img src="{{MEDIA_URL}}{{p}}" class="ui medium image" />
+                                {% endthumbnail %}
                           </div>
                             {% endif %}
                         {% endfor %}
@@ -205,8 +208,9 @@ body {
         <div class="ui stackable grid">
         {% for i in object.api.tmdb.posters|slice:"0:6"%} 
                 <div class="ui five wide column">
-                
-                    <img src="{{i}}" class="ui spaced image" alt="{{object.title}}">
+                    {% thumbnail i '360x530'  as i %} 
+                    <img src="{{i.url}}" class="ui spaced image" alt="{{object.title}}">
+                    {% endthumbnail%}
                 </div>
         {% endfor %}
 

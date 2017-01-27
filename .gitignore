@@ -1,3 +1,4 @@
 *.pyc
 bower_components
 *.sqlite3
+media/cache

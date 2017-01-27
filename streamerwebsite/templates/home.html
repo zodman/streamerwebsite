@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load thumbnail  %}
 {% block title %}
 Inicio
 {% endblock %}
@@ -9,9 +9,9 @@ Inicio
 {% block content %}
 
 
-<div class="ui  three column padded centered grid  ">
+<!--  div class="ui  three column padded centered grid  ">
     
-    <div class="  grey column">
+    < div class="  grey column">
         <h1 class="header">Popular</h1>
     </div>
     <div class=" grey column">
@@ -33,15 +33,15 @@ Inicio
 <img class="ui small image floated right" src="http://nekoanimedd.com/wp-content/uploads/2016/03/logo-r1.png" alt="nekoanimedd">
     </div>
     
-</div>
+</div -->
 
 
 <div class="ui clearing hidden divider "></div>
 <div class="ui two column padded   grid">
     {% for media in  main_media %}
      <div class="column centered">
-        <a href="{% url 'detail' media.media.slug %}" class="">
-            <img src="{{media.media.get_backdrop}}" alt="{{media.media.name}}" class="ui centered  image">    
+         <a href="{% url 'detail' media.media.slug %}" class="">
+             <img src="{{media.media.get_backdrop}}" alt="{{media.media.name}}" class="ui centered  image">    
         <h2 class="ui center aligned header"> {{media.media.name}}</h2>
         </a>
     </div>
@@ -54,7 +54,9 @@ Inicio
     {% for obj in page_obj.object_list %}
     <div class="column">            
         <a href="{% url 'detail' obj.slug %}" class="">
-            <img src="{{obj.image|default:'https://unsplash.it/200/150/?random'}}" alt="" class=" ui  centered medium  image "> 
+             {% thumbnail  obj.image '300x500' crop="center"  as img%}
+             <img src="{{img.url}}" alt="" class=" ui  centered medium  image "> 
+             {% endthumbnail %}
             <h3 class="ui center aligned header">{{ obj.name}}</h3>
         </a>
     </div>

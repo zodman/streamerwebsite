@@ -22,7 +22,7 @@ def cli():
 def media(name, is_anime):
     """ create movie, serie or anime """
     name = " ".join(name)
-    result = gen_api(name, is_anime)
+    result = gen_api(name, is_anime, name)
     name = result.get("trakt").get("title")
     trakt_slug = result.get("trakt").get("ids").get("slug")
     type = "mov" if result.get("type",False) else 'ser'

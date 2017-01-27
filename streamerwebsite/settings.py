@@ -24,7 +24,8 @@ SECRET_KEY = '-fq0%+1h-c795$#0qz6=(-flcv=g_ryf+cn=3i!ag0+84*urk+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 ALLOWED_HOSTS = ['*']
 
 
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-  
+    'sorl.thumbnail', 
     'base',
     'autofixture',
     'livereload',
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.static',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -130,3 +132,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "bower_components"),
 ]
+
+MEDIA_URL ="/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
