@@ -121,8 +121,5 @@ def upload_file(file, source, auth ):
     output = proc.call(cmd)
     return output
     
-
-
-
 if __name__ == "__main__":
     cli()

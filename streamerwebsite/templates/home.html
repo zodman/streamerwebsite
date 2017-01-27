@@ -16,10 +16,10 @@ Inicio
     </div>
     <div class=" grey column">
         <div class="ui secondary pointing  inverted menu">
-            <a class="active item">
+            <a class=" {% if active == "series" %} active {% endif %} item" href="{% url 'filter-home' 'series' %}">
             Series
             </a>
-            <a class="item">
+            <a class="item {% if active == "movies" %} active {% endif %}" href="{% url 'filter-home' 'movies' %}">
                 Peliculas
             </a>
             <a class="item">
@@ -37,24 +37,25 @@ Inicio
 
 
 <div class="ui clearing hidden divider "></div>
-
 <div class="ui two column padded   grid">
-    <div class="   column">
-    
-        <img src="https://unsplash.it/400/250/?random" alt="" class="ui centered big image">    
-    
+    {% for media in  main_media %}
+     <div class="column centered">
+        <a href="{% url 'detail' media.media.slug %}" class="">
+            <img src="{{media.media.get_backdrop}}" alt="{{media.media.name}}" class="ui centered  image">    
+        <h2 class="ui center aligned header"> {{media.media.name}}</h2>
+        </a>
     </div>
-    <div class="   column">
-        <img src="https://unsplash.it/400/250/?random" alt="" class="ui centered big image">    
-    </div>
+       
+    {% endfor %}
 </div>
 
 
-<div class="ui  four column  grid   ">
+<div class="ui  five column  grid   ">
     {% for obj in page_obj.object_list %}
     <div class="column">            
         <a href="{% url 'detail' obj.slug %}" class="">
             <img src="{{obj.image|default:'https://unsplash.it/200/150/?random'}}" alt="" class=" ui  centered medium  image "> 
+            <h3 class="ui center aligned header">{{ obj.name}}</h3>
         </a>
     </div>
     {% endfor %}

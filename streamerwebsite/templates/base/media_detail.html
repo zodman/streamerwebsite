@@ -4,173 +4,213 @@
 {{object.name}}
 {% endblock  %}
 {% block content %}
+
+<style type="text/css" media="screen">
+body {
+    background: url("{{object.api.tmdb.backdrops.0}}");
+    background-size:cover;
+  background-repeat: no-repeat;
+      background-attachment: fixed;
+}
+ .grid {
+     background: rgba(255,255,255,0.5);
+}
+
+</style>
+
 <div class="ui container">
 
-
-<div class="ui stackable row grid ">
-    
-      <div class=" five  wide column img-holder">
-        <img src="{{object.image|default:"http://placehold.it/160x240"}}" class="ui centered medium image"/> 
-      </div>
-
-      <div class="eleven wide column">
-          <h1>
-            {{ object.name }}  ( {{object.api.trakt.year}} )
-          </h1>  
-          <h2>  {{object.get_type}}</h2>
-
-          <div class="ui raised segment ">
-              <div class="ui horizontal header divider">
-                <h3>Sipnosis</h3>
-              </div>  
-              <p>{{object.desc}}</p>
-            </div>
-            <div class="ui raised segment">
-              <div class="ui  grid">
-              
-             <div class="five wide column">
-                <div class="ui red large statistic">
-                  <div class="value">
-                  {{object.api.trakt.rating|floatformat}}  
-                    <i class="thumbs up icon"></i>
-                  </div>
-                  <div class="label">
-                    Calificación
-                  </div>
-                </div>
-              </div>
-             <div class="five wide column">
-                <div class="ui blue large statistic">
-                  <div class="value">
-                  {{object.api.trakt.votes|floatformat}}  
-                  </div>
-                  <div class="label">
-                    Votos
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="six wide column">
-                <h3 class="ui dividing header">Generos</h3>
-                <ul>
-                {% for i in object.api.trakt.genres %}
-                <li> {{i|capfirst}}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-              <div class="sixteen wide column">
-                <h3 class="ui dividing header">Alias</h3>
-                <ul>
-                  {% for a in object.api.trakt.alias  %}
-                  <li>
-                    <i class="ui {{a.country}} flag" /> {{a.title}}
-                  </li>
-                  {% endfor %}
-                </ul>
-              </div>
-      </div>
-
-             
-            </div>
-      </div>
-</div>
-
-{% if object.api.trakt.people %}
-<div class="ui row">
-      <div class="ui grid">
-              <div class="sixteen wide column">
-                <h3 class="ui dividing header">Cast</h3>
-                <div class="ui grid ">
-                {% for p in object.api.trakt.people|slice:":8"  %}
-                    {% if p.image %}
-                          <div class="four wide column centered ">
-                                <img src="{{p.image}}" class="ui small circular image" />
-                            <div class="ui middle aligned content centered">
-                              <p class="ui centered">
-                                {{p.name}}
-                              </p>
-                            </div>
-                          </div>
-                    {% endif %}
-                {% endfor %}
-                </div>
-              </div>
-      </div>
-</div>
-
-{% endif %}
-<div class="ui row ">
-      {% regroup object.entries.all|dictsortreversed:"season" by season as entries %}
-      
-        {% for each_entry in  entries %}
-        <div class="ui horizontal header divider">
-            {% if object.type == 'ser' %}
-              <h3> Temporada {{each_entry.grouper }} </h3>
-            {% else %}
-              <h3> Pelicula </h3>
-            {% endif %}
-         </div>  
-        <div class="ui stackable cards  ">          
-            {% for  entry in each_entry.list %}
-                    <div class=" ui card">
-                        <div class="image img-holder">
-                          <img src="{{entry.image|default:"http://placehold.it/150x110"}}" class="ui centered  image "/>
-                        </div>
-                        
-                          {% if object.type == 'ser' %}
-                          <div class="content center aligned ">
-                             E{{entry.episode|default:"001"}}xS{{entry.season|default:"001"}}
-                          </div>
-                          {% endif %}
-                        
-                          <div class="extra content center aligned">
-                            {% for re in entry.resources.all  %}
-                              <a href="{% url 'view' object.slug re.id '720p'%}" class="ui red label"> 
-                                {{re.quality}}
-                              </a>
-                            {% endfor %}
-                        </div>
-
-                    </div>
-              {% endfor %}
-          </div>
-        {% endfor %}
-      </div>
-
-      <div class="ui  stackable grid">
-        <div class="nine wide column">
-          
-                <div class="ui minimal centered comments">
-                <h3 class="ui dividing header">Commentarios</h3>
-                  {% for c in object.api.trakt.comments  %}
-                  <div class="comment">
-                      <a class="avatar">
-                        <img style="height:auto;" src="https://api.adorable.io/avatars/40x40/{{c.username}}.png" >
-                      </a>
-                      <div class="content">
-                          <span class="author">
-                            {{c.name|default:c.username}}
-                          </span>
-                          <div class="text">
-                              {{c.text}}
-                          </div>
-                      </div>
-                  </div>      
-                  {% endfor %}
-                </div>
- 
+    <div class="ui stackable row grid ">
         
-              </div>
-        <div class="six wide column">
-            {% for i in object.api.tmdb.trailers%} 
-                          {% video  i %}
-            {% endfor %}
+          <div class=" five  wide column img-holder">
+            <img src="{{object.image|default:"http://placehold.it/160x240"}}" class="ui centered medium image"/> 
           </div>
 
-      </div>
-       
+          <div class="eleven wide column">
+              <h1>
+                {{ object.name }}  ( {{object.api.trakt.year}} )
+              </h1>  
+              <h2>  {{object.get_type}}</h2>
+
+              <div class="ui raised segment ">
+                  <div class="ui horizontal header divider">
+                    <h3>Sipnosis</h3>
+                  </div>  
+                  <p>{{object.desc}}</p>
+                </div>
+                <div class="ui raised segment">
+                  <div class="ui  grid">
+                  
+                 <div class="five wide column">
+                    <div class="ui red large statistic">
+                      <div class="value">
+                      {{object.api.trakt.rating|floatformat}}  
+                        <i class="thumbs up icon"></i>
+                      </div>
+                      <div class="label">
+                        Calificación
+                      </div>
+                    </div>
+                  </div>
+                 <div class="five wide column">
+                    <div class="ui blue large statistic">
+                      <div class="value">
+                      {{object.api.trakt.votes|floatformat}}  
+                      </div>
+                      <div class="label">
+                        Votos
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="six wide column">
+                    <h3 class="ui dividing header">Generos</h3>
+                    <ul>
+                    {% for i in object.api.trakt.genres %}
+                    <li> {{i|capfirst}}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <div class="sixteen wide column">
+                    <h3 class="ui dividing header">Alias</h3>
+                    <ul>
+                      {% for a in object.api.trakt.alias  %}
+                      <li>
+                        <i class="ui {{a.country}} flag" /> {{a.title}}
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+          </div>
+
+                 
+                </div>
+          </div>
+    </div>
+
+
+    {% if   object.api.tvdb.fanarts %}
+        <div class="ui row">
+                  <div class="ui grid">
+                      <div class="sixteen wide column"> 
+
+                        <div class="ui grid ">
+                        {% for p in object.api.tvdb.fanarts  %}
+                            {% if p %}
+                        <div class="four wide column centered ">
+                              <img src="{{p}}" class="ui medium image" />
+                          </div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                      </div>
+                   </div>
+        </div>
+    {% endif %}
+
+    {% if object.api.trakt.people %}
+        <div class="ui row">
+              <div class="ui grid">
+                      <div class="sixteen wide column">
+                        <h3 class="ui dividing header">Cast</h3>
+                        <div class="ui grid ">
+                        {% for p in object.api.trakt.people|slice:":8"  %}
+                            {% if p.image %}
+                                  <div class="four wide column centered ">
+                                        <img src="{{p.image}}" class="ui small circular image" />
+                                    <div class="ui middle aligned content centered">
+                                      <p class="ui centered">
+                                        {{p.name}}
+                                      </p>
+                                    </div>
+                                  </div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                      </div>
+              </div>
+        </div>
+    {% endif %}
+
+    <div class="ui row ">
+          {% regroup object.entries.all|dictsortreversed:"season" by season as entries %}
+          
+            {% for each_entry in  entries %}
+                <div class="ui horizontal header divider">
+                    {% if object.type == 'ser' %}
+                      <h3> Temporada {{each_entry.grouper }} </h3>
+                    {% else %}
+                      <h3> Pelicula </h3>
+                    {% endif %}
+                 </div>  
+                    <div class="ui stackable cards  ">          
+                    {% for  entry in each_entry.list %}
+                            <div class=" ui card">
+                                <div class="image img-holder">
+                                  <img src="{{entry.image|default:"http://placehold.it/150x110"}}" class="ui centered  image "/>
+                                </div>
+                                
+                                  {% if object.type == 'ser' %}
+                                  <div class="content center aligned ">
+                                     E{{entry.episode|default:"001"}}xS{{entry.season|default:"001"}}
+                                  </div>
+                                  {% endif %}
+                                
+                                  <div class="extra content center aligned">
+                                    {% for re in entry.resources.all  %}
+                                      <a href="{% url 'view' object.slug re.id '720p'%}" class="ui red label"> 
+                                        {{re.quality}}
+                                      </a>
+                                    {% endfor %}
+                                    </div>
+
+                            </div>
+                      {% endfor %}
+                      </div>
+            {% endfor %}
       </div>
 
+          <div class="ui  stackable grid">
+            <div class="nine wide column">
+              
+                    <div class="ui minimal centered comments">
+                    <h3 class="ui dividing header">Comentarios</h3>
+                      {% for c in object.api.trakt.comments  %}
+                      <div class="comment">
+                          <a class="avatar">
+                            <img style="height:auto;" src="https://api.adorable.io/avatars/40x40/{{c.username}}.png" >
+                          </a>
+                          <div class="content">
+                              <span class="author">
+                                {{c.name|default:c.username}}
+                              </span>
+                              <div class="text">
+                                  {{c.text}}
+                              </div>
+                          </div>
+                      </div>      
+                      {% endfor %}
+                    </div>
+              </div>
+            <div class="six wide column">
+                {% for i in object.api.tmdb.trailers%} 
+                              {% video  i %}
+                {% endfor %}
+
+                
+              </div>
+          </div>
+    <div class="ui row">
+        <div class="ui stackable grid">
+        {% for i in object.api.tmdb.posters|slice:"0:6"%} 
+                <div class="ui five wide column">
+                
+                    <img src="{{i}}" class="ui spaced image" alt="{{object.title}}">
+                </div>
+        {% endfor %}
+
+        </div>
+    </div>
 </div>
 {% endblock %}

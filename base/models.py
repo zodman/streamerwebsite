@@ -5,6 +5,13 @@
 from __future__ import unicode_literals
 from django.db import models
 import jsonfield
+import random
+
+class MainMedia(models.Model):
+    media = models.ForeignKey("Media")
+
+    def __unicode__(self):
+        return u"Main - {}".format(self.media)
 
 
 class Media(models.Model):
@@ -23,8 +30,11 @@ class Media(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ("-created_at",)
+
+    def get_backdrop(self):
+        data = self.api
+        images = data["tmdb"]["backdrops"]
+        return random.choice(images)
 
     def get_type(self):
         return dict(self.TYPES).get(self.type)
