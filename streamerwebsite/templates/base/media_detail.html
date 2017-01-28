@@ -160,13 +160,18 @@ body {
                                   </div>
                                   {% endif %}
                                 
-                                  <div class="extra content center aligned">
+                                  <div class="content center aligned">
                                     {% for re in entry.resources.all  %}
                                       <a href="{% url 'view' object.slug re.id '720p'%}" class="ui red label"> 
                                         {{re.quality}}
                                       </a>
-                                    {% endfor %}
-                                    </div>
+                                      {% endfor %}
+                                  </div>
+                                  <div class="extra content center aligned">
+                                      <span class="ui label">ES</span>
+                                      <span class="ui label">EN</span>
+                                </div>
+
 
                             </div>
                       {% endfor %}
