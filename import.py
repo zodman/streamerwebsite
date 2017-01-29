@@ -84,9 +84,25 @@ def entry(slug, files, season, episode):
 
 def upload(file):
     # TODO: openload uptobox
-    return upload_openload(file)
+    #return upload_openload(file)
     # SOLIDFILES
     #return upload_solidfiles(file)
+    return upload_googlephoto(file)
+def upload_googlephoto(file):
+    cmd = [
+     'upload-gphoto',
+     '-u', username,
+     '-p', password,
+     file,
+    ]
+    print " ".join(cmd)
+    out = proc.call(cmd)
+    print out
+    source = "googlephoto"
+    html_code = ""
+    url = json.loads(out).get("rawUrl","")
+    return source, html_code, url
+
 def upload_openload(file):
     res_url = upload_file(file, "openload", "aec7ac76bd33ac48:RtyA9q50")
     res = res_url.split("/")

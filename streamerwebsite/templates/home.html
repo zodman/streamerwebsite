@@ -57,7 +57,7 @@ Inicio
              {% thumbnail  obj.image '300x500' crop="center"  as img%}
              <img src="{{img.url}}" alt="" class=" ui  centered medium  image "> 
              {% endthumbnail %}
-            <h3 class="ui center aligned header">{{ obj.name}}</h3>
+            <b class="ui center aligned header">{{ obj.name}}</b>
         </a>
     </div>
     {% endfor %}

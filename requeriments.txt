@@ -8,7 +8,7 @@ slugify
 formic==0.9beta3
 guessit
 shelljob
-trakt
+git+https://github.com/moogar0880/PyTrakt.git
 tmdb3
 pytvdbapi
 yandex.translate
@@ -17,4 +17,5 @@ django-jsonfield
 click
 kn3
 sorl.thumbnail
-
+-e git+git@bitbucket.org:snippets/zodman/yo5x6/trakt_tool.git#egg=trakt_tool
+pyyaml
