@@ -13,8 +13,11 @@ import formic
 from shelljob import proc
 import json
 import opengraph
+import requests
 
-conf = yaml.load(open("/home/zodma/.gupload").read())
+HOME = os.environ.get("HOME")
+
+conf = yaml.load(open(os.path.join(HOME,".gupload")).read())
 
 
 @click.group()
@@ -68,14 +71,19 @@ def entry(slug, files, season, episode):
             if not season:
                 season = guessit_result.get("season")
                 episode = guessit_result.get("episode")
-            res = gen_api(media.trakt_slug, media.is_anime)
+            res = gen_api(media.trakt_slug, media.is_anime, media.trakt_slug)
             seasons = res.get("tvdb",{}).get("seasons",None)
+            image = False
             if not seasons:
                 image  = random.choice(res.get("tmdb").get("posters",[]))
             else:
                 for s in seasons:
-                    if int(s.get("number",-1)) == season:
+                    if int(s.get("number",-1)) == int(season):
                         image = s.get("image")
+                        break
+            if not image:
+                click.echo("No pude determinar season ni episode para ponerle una imagen")
+                return
             entry = Entry.objects.create(media=media, image=image,
                     episode=episode, season=season)
 
@@ -112,12 +120,12 @@ def upload_googlephoto(file):
     json_str = "".join(out.split("\n")[7:])
     # print json_str
     url = json.loads(json_str)[0].get("id","")
-    url_share = click.prompt("ahora es tu chamba abre la liga y genera la liga para compartir, cual es?", type=str)
-    resp = request.get(url_share)
+    link="https://photos.google.com/u/1/photo/{}".format(url)
+    url_share = click.prompt("ahora es tu chamba abre la liga {} y genera la liga para compartir, cual es?".format(link), type=str)
+    resp = requests.get(url_share)
     og = opengraph.OpenGraph(resp.url)
-
-
-    control = html_code.format(url)
+    video_url = og["video"]
+    control = html_code.format(video_url)
     return source, control, url
 
 def upload_openload(file):
