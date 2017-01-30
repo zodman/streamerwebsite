@@ -2,7 +2,7 @@ import os
 import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","streamerwebsite.settings")
 django.setup()
-
+import yaml
 import click
 from base.models import Media, Entry, Resource
 from trakt_tool import gen_api
@@ -11,6 +11,11 @@ import random
 import guessit
 import formic
 from shelljob import proc
+import json
+import opengraph
+
+conf = yaml.load(open("/home/zodma/.gupload").read())
+
 
 @click.group()
 def cli():
@@ -27,10 +32,7 @@ def media(name, is_anime):
     trakt_slug = result.get("trakt").get("ids").get("slug")
     type = "mov" if result.get("type",False) else 'ser'
     posters = result.get("tmdb", {}).get("posters", [])
-    if posters:
-        image = random.choice(posters)
-    else:
-        image = ""
+    image = result.get("tmdb",{}).get("poster")
     desc = result.get("trakt",{}).get("overview","")
     media,created  = Media.objects.get_or_create(name=name, slug=
             slugify.slugify(name),defaults=dict(is_anime=is_anime,trakt_slug=trakt_slug, 
@@ -39,6 +41,10 @@ def media(name, is_anime):
     if not created:
         media.api = result
         media.save()
+    else:
+        media.api = result
+        media.save()
+
 
     click.echo(">>>>>>> {} {}".format(media.id, media.slug))
 
@@ -51,12 +57,11 @@ def media(name, is_anime):
 def entry(slug, files, season, episode):
     media = Media.objects.get(slug=slug)
     click.echo("%s %s type: %s" % (media.name,media.trakt_slug, media.get_type()))
-    print (files,)
-    for file in formic.FileSet(include=files):
-
+    for file in formic.FileSet(include=files).qualified_files(absolute=False):
+        print file
         guessit_result = guessit.guessit(file)
         if media.type == "mov":
-            res = gen_api(media.trakt_slug, media.is_anime)
+            res = gen_api(media.trakt_slug, media.is_anime, media.trakt_slug)
             image  = random.choice(res.get("tmdb").get("posters",[]))
             entry = Entry.objects.create(media=media, image=image)
         elif media.type == "ser":
@@ -89,19 +94,31 @@ def upload(file):
     #return upload_solidfiles(file)
     return upload_googlephoto(file)
 def upload_googlephoto(file):
+    username, password = conf.get("username"), conf.get("password")
     cmd = [
-     'upload-gphoto',
+     'upload-gphotos',
      '-u', username,
      '-p', password,
      file,
     ]
     print " ".join(cmd)
     out = proc.call(cmd)
-    print out
     source = "googlephoto"
-    html_code = ""
-    url = json.loads(out).get("rawUrl","")
-    return source, html_code, url
+    html_code = """
+        <video controls>
+            <source src="{}" type="video/mp4">
+        </video>
+    """ 
+    json_str = "".join(out.split("\n")[7:])
+    # print json_str
+    url = json.loads(json_str)[0].get("id","")
+    url_share = click.prompt("ahora es tu chamba abre la liga y genera la liga para compartir, cual es?", type=str)
+    resp = request.get(url_share)
+    og = opengraph.OpenGraph(resp.url)
+
+
+    control = html_code.format(url)
+    return source, control, url
 
 def upload_openload(file):
     res_url = upload_file(file, "openload", "aec7ac76bd33ac48:RtyA9q50")

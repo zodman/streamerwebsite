@@ -27,14 +27,16 @@
 	
 	
 
-		<div class="ui inverted mini  menu">
-			<a class=" item active" href="{% url 'home' %}">
+		<div class="ui mini blue three item inverted menu">
+			<a class=" item " href="{% url 'home' %}">
 				Hulun&aacute;!
 			</a>
-			<!-- div class="ui icon input inverted transparent">
-				<input type="text" placeholder="Search...">
-				<i class="search icon"></i>
-			</div-->
+			<div class="item active">
+                Movies
+			</div>
+            <div class="item">
+                Series
+            </div>
 		</div>
 
 		{% block content  %}
