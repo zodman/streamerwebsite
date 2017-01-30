@@ -86,6 +86,7 @@ def entry(slug, files, season, episode):
                 return
             entry = Entry.objects.create(media=media, image=image,
                     episode=episode, season=season)
+            click.echo("entry {} creado".format(entry.id))
 
         qua = guessit_result.get("screen_size","720p")
         resource = Resource(entry=entry, quality=qua)
@@ -94,6 +95,7 @@ def entry(slug, files, season, episode):
         resource.code = ret
         resource.original_url = original_url
         resource.save()
+        click.echo("Subido!! resource: {}".format(resource.id))
 
 def upload(file):
     # TODO: openload uptobox
