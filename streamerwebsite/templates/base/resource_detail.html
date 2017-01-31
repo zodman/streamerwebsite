@@ -10,9 +10,17 @@
                 {% if object.entry.episode %}
                         {{object.entry.episode}}x{{object.entry.season|default:""}}
                 {% endif %}
-            <div class="divider">
-            </div>
-                {{object.code|safe}}
+                <div class="divider"></div>
+                {% if "googlephoto" in object.source %}
+                <video controls>
+                    {% for sub in object.subtitles.all  %}
+                    <track kind="subtitles" label="{{sub.language}}" src="{{sub.file}}"></track>
+                    {% endfor %}
+                </video>
+                {% else %}
+                        
+                        {{object.code|safe}}
+                {% endif %}
         </div>
             
 	</div>

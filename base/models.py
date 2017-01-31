@@ -90,7 +90,7 @@ class Resource(models.Model):
 
 
 class Subtitle(models.Model):
-    resource = models.ForeignKey("Resource")
+    resource = models.ForeignKey("Resource", related_name="subtitles")
     language = models.CharField(max_length=5)
     file = models.FileField(upload_to="subtitles/%Y/%m/%d/")
     created_at = models.DateTimeField(auto_now_add=True)

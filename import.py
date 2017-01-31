@@ -144,7 +144,7 @@ def upload_googlephoto(file):
     og = opengraph.OpenGraph(resp.url)
     video_url = og["video"]
     control = html_code.format(video_url)
-    return source, control, url
+    return source, control, video_url
 
 def upload_openload(file):
     res_url = upload_file(file, "openload", "aec7ac76bd33ac48:RtyA9q50")
