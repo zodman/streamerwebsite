@@ -13,6 +13,7 @@
                 <div class="divider"></div>
                 {% if "googlephoto" in object.source %}
                 <video controls>
+                    <source src="{{object.original_url}}" type="video/mp4"></source>
                     {% for sub in object.subtitles.all  %}
                     <track kind="subtitles" label="{{sub.language}}" src="{{sub.file}}"></track>
                     {% endfor %}
