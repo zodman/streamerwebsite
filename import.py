@@ -106,8 +106,8 @@ def entry(slug, files, season, episode,subs):
 
             subtitle = Subtitle(language=language)
             fp = File(open(file))
-            subtitle.file.save(file,fp)
             subtitle.resource = resource
+            subtitle.file.save(file,fp)
             subtitle.save()
 
 
