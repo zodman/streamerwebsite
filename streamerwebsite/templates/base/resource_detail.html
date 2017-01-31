@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="ui  stackable sixteen  grid  row">
-		
-		<div class="row column centered ">
+	<div class="ui  four  column centered grid">
+	    	
+		<div class="two column ">
         	<h1>
 		        <a href="{% url 'detail' object.entry.media.slug %}">{{object.entry.media.name}}</a>
             </h1>
                 {% if object.entry.episode %}
                         {{object.entry.episode}}x{{object.entry.season|default:""}}
                 {% endif %}
-                <div class="divider"></div>
                 {% if "googlephoto" in object.source %}
-                <video controls>
+                 <video class="mejs__player">
                     <source src="{{object.original_url}}" type="video/mp4"></source>
                     {% for sub in object.subtitles.all  %}
-                    <track kind="subtitles" label="{{sub.language}}" src="{{sub.file}}"></track>
+                    <track kind="captions" label="{{sub.language}}" srclang="{{sub.language}}" src="{{sub.file.url}}" />
                     {% endfor %}
                 </video>
-                {% else %}
+
+                               {% else %}
                         
                         {{object.code|safe}}
                 {% endif %}
