@@ -16,6 +16,6 @@ django-embed-video
 django-jsonfield
 click
 kn3
-sorl.thumbnail
+sorl-thumbnail
 -e git+git@bitbucket.org:snippets/zodman/yo5x6/trakt_tool.git#egg=trakt_tool
 pyyaml

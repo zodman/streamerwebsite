@@ -4,7 +4,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE","streamerwebsite.settings")
 django.setup()
 import yaml
 import click
-from base.models import Media, Entry, Resource
+from base.models import Media, Entry, Resource, Subtitle
 from trakt_tool import gen_api
 import slugify
 import random
@@ -14,6 +14,7 @@ from shelljob import proc
 import json
 import opengraph
 import requests
+from django.core.files import File 
 
 HOME = os.environ.get("HOME")
 
@@ -55,9 +56,10 @@ def media(name, is_anime):
 @cli.command()
 @click.argument("slug")
 @click.option("--files",default="*")
+@click.option("--subs",default="*.srt")
 @click.option("--season",default=None)
 @click.option("--episode",default=None)
-def entry(slug, files, season, episode):
+def entry(slug, files, season, episode,subs):
     media = Media.objects.get(slug=slug)
     click.echo("%s %s type: %s" % (media.name,media.trakt_slug, media.get_type()))
     for file in formic.FileSet(include=files).qualified_files(absolute=False):
@@ -97,12 +99,26 @@ def entry(slug, files, season, episode):
         resource.save()
         click.echo("Subido!! resource: {}".format(resource.id))
 
+        for file in formic.FileSet(include=subs).qualified_files(absolute=False):
+            language = ""
+            if ".es.srt" in file:
+                language = "es"
+
+            subtitle = Subtitle(language=language)
+            fp = File(open(file))
+            subtitle.file.save(file,fp)
+            subtitle.resource = resource
+            subtitle.save()
+
+
 def upload(file):
     # TODO: openload uptobox
     #return upload_openload(file)
     # SOLIDFILES
     #return upload_solidfiles(file)
     return upload_googlephoto(file)
+
+
 def upload_googlephoto(file):
     username, password = conf.get("username"), conf.get("password")
     cmd = [

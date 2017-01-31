@@ -63,7 +63,8 @@ class Entry(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.media
-
+    class Meta:
+        unique_together = ("media","episode", "season")
 
 class Resource(models.Model):
     QUA = (
@@ -87,3 +88,13 @@ class Resource(models.Model):
     class Meta:
         unique_together  = ("entry","quality")
 
+
+class Subtitle(models.Model):
+    resource = models.ForeignKey("Resource")
+    language = models.CharField(max_length=5)
+    file = models.FileField(upload_to="subtitles/%Y/%m/%d/")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u"{} - {}".format(self.language, self.resource)

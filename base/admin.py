@@ -14,3 +14,4 @@ admin.site.register(Resource, ResourceAdmin)
 
 admin.site.register(MainMedia)
 
+admin.site.register(Subtitle)
