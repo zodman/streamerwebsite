@@ -1,20 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="ui  four  column centered grid">
+<style>
+
+    .mejs__container{
+          margin-left:auto;
+            margin-right:auto;
+        }
+</style>
+
+	<div class="ui  two column centered grid">
 	    	
-		<div class="two column ">
-        	<h1>
+		<div class=" column ">
+        	<h1 class="">
 		        <a href="{% url 'detail' object.entry.media.slug %}">{{object.entry.media.name}}</a>
             </h1>
                 {% if object.entry.episode %}
                         {{object.entry.episode}}x{{object.entry.season|default:""}}
                 {% endif %}
                 {% if "googlephoto" in object.source %}
-                 <video class="mejs__player">
-                    <source src="{{object.original_url}}" type="video/mp4"></source>
+                <video  width="100%" height="100%">
+                    <source src="{{object.original_url|slice:':-4'}}-m18" title="320p" type="video/mp4"></source>
+                    <source src="{{object.original_url|slice:':-4'}}-m22" title="720p" type="video/mp4"></source>
+                    <source src="{{object.original_url|slice:':-4'}}-m37" title="1080p" type="video/mp4"></source>
                     {% for sub in object.subtitles.all  %}
-                    <track kind="captions" label="{{sub.language}}" srclang="{{sub.language}}" src="{{sub.file.url}}" />
+                    <track kind="captions" label="{{sub.language}}" srclang="{{sub.language}}" src="{{sub.file.url}}" default />
                     {% endfor %}
                 </video>
 
@@ -43,5 +53,15 @@
 			</div>
 		</div>
 	</div>
-	
+
+
+    <script>
+        $(document).ready(function(){
+            $("video").mediaelementplayer({features:['playpause', 'current', 'progress', 'duration', 'tracks','volume', 'fullscreen','sourcechooser'],});
+        
+        
+        });
+    
+    </script>
+
 {% endblock content %}
