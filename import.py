@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","streamerwebsite.settings")
@@ -5,6 +6,7 @@ django.setup()
 import yaml
 import click
 from base.models import Media, Entry, Resource, Subtitle
+from django.conf import settings
 from trakt_tool import gen_api
 import slugify
 import random
@@ -62,7 +64,7 @@ def media(name, is_anime):
 def entry(slug, files, season, episode,subs):
     media = Media.objects.get(slug=slug)
     click.echo("%s %s type: %s" % (media.name,media.trakt_slug, media.get_type()))
-    for file in formic.FileSet(include=files).qualified_files(absolute=False):
+    for file in formic.FileSet(include=files):
         print file
         guessit_result = guessit.guessit(file)
         if media.type == "mov":
@@ -109,6 +111,13 @@ def entry(slug, files, season, episode,subs):
             subtitle.resource = resource
             subtitle.file.save(file,fp)
             subtitle.save()
+            # cmd = [
+                # 'iconv','-f', 'ISO-8859-1',
+                # '-t', 'UTF-8',
+                # os.path.join(settings.BASE_DIR,subtitle.file)
+            # ]
+            # print " ".join(cmd)
+            # proc.call(cmd)
 
 
 def upload(file):

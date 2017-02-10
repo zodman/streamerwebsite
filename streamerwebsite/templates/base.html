@@ -41,12 +41,11 @@
 			<a class=" item " href="{% url 'home' %}">
 				Hulun&aacute;!
 			</a>
-			<div class="item active">
-                Movies
-			</div>
-            <div class="item">
-                Series
-            </div>
+                <a href="/?filter=ser" class="item">
+                    Series
+                </a>
+                <a href="/?filter=mov" class="item">
+                    Peliculas</a>
 		</div>
         <div class="ui fluid container">
 		{% block content  %}

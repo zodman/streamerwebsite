@@ -7,14 +7,18 @@
 
 <style type="text/css" media="screen">
 body {
-    background: url("{{object.api.tmdb.backdrops.0}}");
+    background: url("{{object.api.tmdb.backdrops|random}}");
     background-size:cover;
   background-repeat: no-repeat;
       background-attachment: fixed;
 }
  .grid {
      background: rgba(255,255,255,0.5);
-}
+ }
+
+ .fullhref:hover {
+     cursor:pointer;
+ }
 
 </style>
 
@@ -147,9 +151,9 @@ body {
                       <h3> Pelicula </h3>
                     {% endif %}
                  </div>  
-                    <div class="ui stackable cards  ">          
+                    <div class="ui stackable cards link ">          
                     {% for  entry in each_entry.list %}
-                            <div class=" ui card">
+                            <div class=" ui card fullhref">
                                 <div class="image img-holder">
                                   <img src="{{entry.image|default:"http://placehold.it/150x110"}}" class="ui centered  image "/>
                                 </div>
@@ -162,17 +166,11 @@ body {
                                 
                                   <div class="content center aligned">
                                     {% for re in entry.resources.all  %}
-                                      <a href="{% url 'view' object.slug re.id '720p'%}" class="ui red label"> 
+                                      <a href="{% url 'view' object.slug re.id re.quality%}" class="ui red label" > 
                                         {{re.quality}}
                                       </a>
                                       {% endfor %}
                                   </div>
-                                  <div class="extra content center aligned">
-                                      <span class="ui label">ES</span>
-                                      <span class="ui label">EN</span>
-                                </div>
-
-
                             </div>
                       {% endfor %}
                       </div>
@@ -222,4 +220,16 @@ body {
         </div>
     </div>
 </div>
+
+    <script>
+        $(document).ready(function(){
+            $(".fullhref").on("click",function(evnt){
+                var href= $(this).find("a").attr("href");
+                document.location.href=href;
+            });
+            });
+    
+    </script>
+
+
 {% endblock %}

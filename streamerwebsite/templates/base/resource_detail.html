@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<style>
+<style type="text/css" media="screen">
+body {
+    background: url("{{object.entry.media.api.tmdb.backdrops|random}}");
+    background-size:cover;
+  background-repeat: no-repeat;
+      background-attachment: fixed;
+}
+ .grid {
+}
+
 
     .mejs__container{
           margin-left:auto;
@@ -9,10 +18,10 @@
         }
 </style>
 
-	<div class="ui  two column centered grid">
+	<div class="ui  one column centered grid">
 	    	
 		<div class=" column ">
-        	<h1 class="">
+        	<h1 class=" ui inverted segment">
 		        <a href="{% url 'detail' object.entry.media.slug %}">{{object.entry.media.name}}</a>
             </h1>
                 {% if object.entry.episode %}
