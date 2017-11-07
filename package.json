@@ -1,0 +1,21 @@
+{
+  "name": "brunch-app",
+  "description": "Brunch.io application",
+  "private": true,
+  "author": "Brunch",
+  "version": "0.0.1",
+  "repository": "",
+  "scripts": {
+    "start": "brunch watch ",
+    "build": "brunch build --production"
+  },
+  "dependencies": {
+    "browser-sync-brunch": "^0.0.9",
+    "css-spaces": "^0.3.5"
+  },
+  "devDependencies": {
+    "brunch": "^2",
+    "clean-css-brunch": "^2",
+    "uglify-js-brunch": "^2"
+  }
+}
