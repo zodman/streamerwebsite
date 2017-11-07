@@ -38,8 +38,7 @@ def media(name, is_anime):
     trakt_slug = result.get("trakt").get("ids").get("slug")
     type = "mov" if result.get("type",False) else 'ser'
     posters = result.get("tmdb", {}).get("posters", [])
-    image = result.get("tmdb",{}).get("poster")
-    assert image, result.get("tmdb")
+    image = result.get("tmdb",{}).get("posters").pop()
     desc = result.get("trakt",{}).get("overview","")
     media,created  = Media.objects.get_or_create(name=name, slug=
             slugify.slugify(name),defaults=dict(is_anime=is_anime,trakt_slug=trakt_slug, 
