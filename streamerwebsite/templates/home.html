@@ -36,8 +36,7 @@ Inicio
 </div -->
 
 
-<div class="ui clearing hidden divider "></div>
-<div class="ui stackable two column padded   grid">
+<div class="columns">
     {% for media in  main_media %}
      <div class="column centered">
          <a href="{% url 'detail' media.media.slug %}" class="">
@@ -50,9 +49,9 @@ Inicio
 </div>
 
 
-<div class="ui  stackable five column  grid   ">
+<div class="columns  is-multiline">
     {% for obj in page_obj.object_list %}
-    <div class="column">            
+    <div class="column is-2 ">            
         <a href="{% url 'detail' obj.slug %}" class="">
              {% thumbnail  obj.image '300x500' crop="center"  as img%}
              <img src="{{img.url}}" alt="" class=" ui  centered medium  image "> 

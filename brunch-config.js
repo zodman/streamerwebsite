@@ -23,6 +23,6 @@ exports.plugins = {
 exports.npm = {
     styles: {
         'css-spaces': ["dist/spaces.min.css"],
-        'bulma': ["css/bulma.min.css", 'css/bulma.min.map']
+        'bulma': ["css/bulma.css", 'css/bulma.css.map']
     }
 };

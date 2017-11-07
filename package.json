@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "browser-sync-brunch": "^0.0.9",
+    "bulma": "^0.6.1",
     "css-spaces": "^0.3.5"
   },
   "devDependencies": {
