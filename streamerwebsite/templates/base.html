@@ -10,7 +10,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="{{MEDIA_URL}}public/app.css" />
-	<link rel="stylesheet" href="{{MEDIA_URL}}public/app.css.map" />
 
 <style>
 	
@@ -26,9 +25,10 @@
 <link href="//cdn.jsdelivr.net/mediaelement/latest/mediaelementplayer.css" rel="stylesheet">
 <link href="{{MEDIA_URL}}source-chooser.min.css" rel="stylesheet" />
 <script src="{{MEDIA_URL}}source-chooser.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/superhero/bulmaswatch.min.css">
 
 </head>
-<body class="">
+<body class="is-link">
 	
 	{% block submenu %}
 	
@@ -56,7 +56,7 @@
        </div>
 
 
-        <div class="container is-fluid is-dark">
+        <div class="container is-fluid is-dark m-xxl">
 		{% block content  %}
 
 		{% endblock %}		
@@ -64,7 +64,6 @@
         </div>
 
 
-	<script type="text/javascript" src="{{MEDIA_URL}}public/app.js.map"></script>
 	<script type="text/javascript" src="{{MEDIA_URL}}public/app.js"></script>
 </body>
 </html>

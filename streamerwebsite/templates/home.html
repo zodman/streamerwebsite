@@ -51,12 +51,13 @@ Inicio
 
 <div class="columns  is-multiline">
     {% for obj in page_obj.object_list %}
-    <div class="column is-2 ">            
-        <a href="{% url 'detail' obj.slug %}" class="">
-             {% thumbnail  obj.image '300x500' crop="center"  as img%}
-             <img src="{{img.url}}" alt="" class=" ui  centered medium  image "> 
+    <div class="column  is-2">            
+        <a href="{% url 'detail' obj.slug %}" class="is-white">
+             {% thumbnail  obj.image '260x345' crop="center"  as img%}
+             <img src="{{img.url}}" alt="" class=" image has-shadow" > 
              {% endthumbnail %}
-            <!-- b class="ui center aligned header">{{ obj.name}}</b-->
+             <b class="is-size-7">{{ obj.name|upper}}</b><br>
+             <b class="is-size-7">{{obj.api.trakt.year}}</b>
         </a>
     </div>
     {% endfor %}
