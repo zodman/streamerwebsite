@@ -9,7 +9,7 @@
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="{{STATIC_URL}}semantic/dist/semantic.min.css" />
+	<link rel="stylesheet" href="{{MEDIA_URL}}public/app.css" />
 
 <style>
 	
@@ -23,13 +23,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/mediaelement/latest/mediaelement-and-player.min.js"></script>
 <link href="//cdn.jsdelivr.net/mediaelement/latest/mediaelementplayer.css" rel="stylesheet">
-
-
-<script src="/media/source-chooser.min.js"></script>
-<link href="/media/source-chooser.min.css" rel="stylesheet" />
+<link href="{{MEDIA_URL}}source-chooser.min.css" rel="stylesheet" />
+<script src="{{MEDIA_URL}}source-chooser.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/superhero/bulmaswatch.min.css">
 
 </head>
-<body class="smallgrey">
+<body class="is-link">
 	
 	{% block submenu %}
 	
@@ -37,17 +36,27 @@
 	
 	
 
-		<div class="ui mini blue three item inverted menu">
-			<a class=" item " href="{% url 'home' %}">
+    <div class="navbar">
+        <div class="navbar-brand">
+        
+			<a class="navbar-item " href="{% url 'home' %}">
 				Hulun&aacute;!
-			</a>
-                <a href="/?filter=ser" class="item">
-                    Series
-                </a>
-                <a href="/?filter=mov" class="item">
-                    Peliculas</a>
-		</div>
-        <div class="ui fluid container">
+            </a>
+        </div>
+            <div class="navbar-menu is-active">
+                <div class="navbar-start">
+                    <a href="/?filter=ser" class="navbar-item">
+                        Series
+                    </a>
+                    <a href="/?filter=mov" class="navbar-item">
+                        Peliculas</a>
+     
+                </div>
+           </div>
+       </div>
+
+
+        <div class="container is-fluid is-dark m-xxl">
 		{% block content  %}
 
 		{% endblock %}		
@@ -55,6 +64,6 @@
         </div>
 
 
-	<script type="text/javascript" src="{{STATIC_URL}}vue/dist/vue.min.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}public/app.js"></script>
 </body>
 </html>
