@@ -5,6 +5,8 @@ https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c61dbd22421371.563430
 
 https://dribbble.com/shots/2983800-Online-cinema/attachments/621936
 
+https://dribbble.com/shots/2097080-Netflix-Redesign-Social/attachments/378755
+
 
 openload
 Uptobox
