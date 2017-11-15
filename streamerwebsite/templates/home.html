@@ -36,20 +36,31 @@ Inicio
 </div -->
 
 
-<div class="columns">
     {% for media in  main_media %}
-     <div class="column centered">
+    <div class="columns main-media is-fluid" style="{% spaceless %}
+        background:
+linear-gradient(
+to right, rgba(255,255,255,0),
+              rgba(255,255,255,1) 100%
+              ), url({{media.media.get_backdrop}}) no-repeat center;
+        {% endspaceless%}"> 
+
+    <div class="column is-4 is-offset-8 is-pulled-left mt-xxl ">
          <a href="{% url 'detail' media.media.slug %}" class="">
-             <img src="{{media.media.get_backdrop}}" alt="{{media.media.name}}" class="ui centered  image">    
-        <h2 class="ui center aligned header"> {{media.media.name}}</h2>
+            <h2 class="is-size-1 is-uppercase"> {{media.media.name}}</h2>
         </a>
+        <p class="content"> {{media.media.desc|truncatewords:50}} </p>
+        <button class="button is-large"> Play ultmo capitulo </button>
+        <button class="button is-large"> Detalles </button>
     </div>
-       
+    </div>
     {% endfor %}
-</div>
 
 
-<div class="columns  is-multiline">
+<div class="container is-mobile">
+
+    <h2 class="mt-xl is-size-3"> Ultimos agregados: </h2>
+<div class="columns  is-multiline mt-xl">
     {% for obj in page_obj.object_list %}
     <div class="column  is-2">            
         <a href="{% url 'detail' obj.slug %}" class="is-white">
@@ -63,6 +74,7 @@ Inicio
     {% endfor %}
 </div>
 
+</div>
 <div class="right floated">
     {% include "_pager.html" %} 
 </div>

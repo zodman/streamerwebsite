@@ -13,10 +13,14 @@ exports.files = {
 
 exports.plugins = {
     browserSync: {
-        files:["**/*.{scss,css,html,py,js}"],
+         watchOptions: {
+            ignoreInitial: true,
+            ignored: ['node_modules']
+        },
+        files:["**/*.{scss,css,html,py}"],
         proxy:'localhost:8000',
         reloadDebounce:3000,
-          logLevel: "debug"
+       logLevel: "debug"
     }
 };
 
