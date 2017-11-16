@@ -45,10 +45,10 @@
         </div>
             <div class="navbar-menu is-active">
                 <div class="navbar-start">
-                    <a href="/?filter=ser" class="navbar-item">
+                    <a href="{% url 'filter-home' 'series' %}" class="navbar-item">
                         Series
                     </a>
-                    <a href="/?filter=mov" class="navbar-item">
+                    <a href="{% url 'filter-home' 'movies'  %}" class="navbar-item">
                         Peliculas</a>
      
                 </div>

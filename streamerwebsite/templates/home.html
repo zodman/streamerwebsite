@@ -9,40 +9,13 @@ Inicio
 {% block content %}
 
 
-<!--  div class="ui  three column padded centered grid  ">
-    
-    < div class="  grey column">
-        <h1 class="header">Popular</h1>
-    </div>
-    <div class=" grey column">
-        <div class="ui secondary pointing  inverted menu">
-            <a class=" {% if active == "series" %} active {% endif %} item" href="{% url 'filter-home' 'series' %}">
-            Series
-            </a>
-            <a class="item {% if active == "movies" %} active {% endif %}" href="{% url 'filter-home' 'movies' %}">
-                Peliculas
-            </a>
-            <a class="item">
-                Anime
-            </a>
-
-        </div>
-    </div>
-    
-    <div class="ui grey  column centered  ">
-<img class="ui small image floated right" src="http://nekoanimedd.com/wp-content/uploads/2016/03/logo-r1.png" alt="nekoanimedd">
-    </div>
-    
-</div -->
-
-
-    {% for media in  main_media %}
     <div class="columns main-media is-fluid" style="{% spaceless %}
         background:
 linear-gradient(
 to right, rgba(255,255,255,0),
               rgba(255,255,255,1) 100%
-              ), url({{media.media.get_backdrop}}) no-repeat center;
+              ), url({{media.media.get_backdrop}}) no-repeat left top;
+              background-size:100% 100% contain;
         {% endspaceless%}"> 
 
     <div class="column is-4 is-offset-8 is-pulled-left mt-xxl ">
@@ -54,12 +27,17 @@ to right, rgba(255,255,255,0),
         <button class="button is-large"> Detalles </button>
     </div>
     </div>
-    {% endfor %}
 
 
 <div class="container is-mobile">
 
     <h2 class="mt-xl is-size-3"> Ultimos agregados: </h2>
+<div class="clearfix container is-mobile">
+    {% include "_pager.html" %} 
+</div>
+
+
+
 <div class="columns  is-multiline mt-xl">
     {% for obj in page_obj.object_list %}
     <div class="column  is-2">            
@@ -74,9 +52,11 @@ to right, rgba(255,255,255,0),
     {% endfor %}
 </div>
 
-</div>
-<div class="right floated">
+<div class="clearfix container is-mobile">
     {% include "_pager.html" %} 
+</div>
+
+
 </div>
 
 {% endblock %}
