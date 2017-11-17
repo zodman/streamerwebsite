@@ -6,15 +6,12 @@
 {% block content %}
 
 <style type="text/css" media="screen">
-body {
-    background: url("{{object.api.tmdb.backdrops|random}}");
-    background-size:cover;
-  background-repeat: no-repeat;
+    .gray {
+        background: url("{{object.api.tmdb.backdrops|random}}");
+        background-size:cover;
+      background-repeat: no-repeat;
       background-attachment: fixed;
 }
- .grid {
-     background: rgba(255,255,255,0.5);
- }
 
  .fullhref:hover {
      cursor:pointer;
@@ -22,19 +19,21 @@ body {
 
 </style>
 
-<div class="ui container">
+<div class="container">
 
-    <div class="ui stackable row grid ">
+    <div class="columns ">
         
-          <div class=" five  wide column img-holder">
+          <div class=" column ">
             <img src="{{object.image|default:"http://placehold.it/160x240"}}" class="ui centered medium image"/> 
           </div>
 
-          <div class="eleven wide column">
-              <h1>
+          <div class=" column">
+              <div class="box mt-xl">
+              
+              <h1 class="title">
                 {{ object.name }}  ( {{object.api.trakt.year}} )
               </h1>  
-              <h2>  {{object.get_type}}</h2>
+              <h2 class="subtitle">  {{object.get_type}}</h2>
 
               <div class="ui raised segment ">
                   <div class="ui horizontal header divider">
@@ -43,7 +42,7 @@ body {
                   <p>{{object.desc}}</p>
                 </div>
                 <div class="ui raised segment">
-                  <div class="ui  grid">
+                  <div class="ui columns mt-s">
                   
                  <div class="five wide column">
                     <div class="ui red large statistic">
@@ -81,13 +80,14 @@ body {
                     <ul>
                       {% for a in object.api.trakt.alias  %}
                       <li>
-                        <i class="ui {{a.country}} flag" /> {{a.title}}
+                          <i class="ui {{a.country}} flag" > </i> {{a.title}}
                       </li>
                       {% endfor %}
                     </ul>
                   </div>
           </div>
 
+              </div>
                  
                 </div>
           </div>
@@ -96,11 +96,11 @@ body {
 
     {% if   object.api.tvdb.fanarts%}
     <!-- fan arts -->
-        <div class="ui row">
-                  <div class="ui grid">
+        <div class=" box">
+                  <div class="columns">
                       <div class="sixteen wide column"> 
 
-                        <div class="ui grid ">
+                        <div class="ui columns">
                         {% for p in object.api.tvdb.fanarts|slice:':8'  %}
                             {% if p %}
                             <div class="four wide column centered ">
@@ -117,11 +117,11 @@ body {
     {% endif %}
 
     {% if object.api.trakt.people %}
-        <div class="ui row">
-              <div class="ui grid">
+    <div class="box">
+              <div class="ui grid columns">
                       <div class="sixteen wide column">
                         <h3 class="ui dividing header">Cast</h3>
-                        <div class="ui grid ">
+                        <div class="ui columns ">
                         {% for p in object.api.trakt.people|slice:":8"  %}
                             {% if p.image %}
                                   <div class="four wide column centered ">
@@ -135,12 +135,11 @@ body {
                             {% endif %}
                         {% endfor %}
                         </div>
-                      </div>
-              </div>
-        </div>
+                  </div>
+    </div>
     {% endif %}
 
-    <div class="ui row ">
+    <div class="ui columns ">
           {% regroup object.entries.all|dictsortreversed:"season" by season as entries %}
           
             {% for each_entry in  entries %}
@@ -177,7 +176,7 @@ body {
             {% endfor %}
       </div>
 
-          <div class="ui  stackable grid">
+          <div class="columns">
             <div class="nine wide column">
               
                     <div class="ui minimal centered comments">
@@ -205,10 +204,10 @@ body {
                 {% endfor %}
 
                 
-              </div>
+            </div>
+            </div>
           </div>
-    <div class="ui row">
-        <div class="ui stackable grid">
+        <div class="columns">
         {% for i in object.api.tmdb.posters|slice:"0:6"%} 
                 <div class="ui five wide column">
                     {% thumbnail i '360x530'  as i %} 
@@ -218,7 +217,6 @@ body {
         {% endfor %}
 
         </div>
-    </div>
 </div>
 
     <script>
