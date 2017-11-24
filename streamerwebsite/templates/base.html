@@ -26,25 +26,22 @@
 <link href="{{MEDIA_URL}}source-chooser.min.css" rel="stylesheet" />
 <script src="{{MEDIA_URL}}source-chooser.min.js"></script>
 <!-- link rel="stylesheet" href="https://unpkg.com/bulmaswatch/superhero/bulmaswatch.min.css"-->
-<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet"
+<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet" />
 </head>
 <body class="">
 	
 	{% block submenu %}
 	
 	{% endblock submenu %}
-	
-	
 
-    <div class="navbar is-black">
+    <div class="navbar is-black" role="navigation" arial-label="main navigation">
         <div class="navbar-brand ">
-        
-			<a class="navbar-item is-danger " href="{% url 'home' %}">
+			<a class="navbar-item is-danger is-size-1" href="{% url 'home' %}">
 				PeliFlix
             </a>
         </div>
-            <div class="navbar-menu is-active">
-                <div class="navbar-start">
+        <div class="navbar-menu">
+                <div class="navbar-start is-size-3">
                     <a href="{% url 'filter-home' 'series' %}" class="navbar-item">
                         Series
                     </a>
@@ -52,8 +49,8 @@
                         Peliculas</a>
      
                 </div>
-           </div>
        </div>
+   </div>
 
 <div class="gray">
 		{% block content  %}
@@ -61,7 +58,6 @@
 		{% endblock %}		
 
 </div>
-
 
 	<script type="text/javascript" src="{{MEDIA_URL}}public/app.js"></script>
 </body>

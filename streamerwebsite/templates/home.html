@@ -8,46 +8,62 @@ Inicio
 
 {% block content %}
 
+<div class="columns main-media is-fluid white is-hidden-mobile"> 
 
-    <div class="columns main-media is-fluid" style="{% spaceless %}
+        <div class="column is-8" style="{% spaceless %}
         background:
-linear-gradient(
-to right, rgba(255,255,255,0),
+                linear-gradient(
+                to right,
+              rgba(255,255,255,0),
+              rgba(255,255,255,0) 30%,
+              rgba(255,255,255,0) 30%,
+              rgba(255,255,255,0) 30%,
+              rgba(255,255,255,0) 50%,
               rgba(255,255,255,1) 100%
-              ), url({{media.media.get_backdrop}}) no-repeat left top;
-              background-size:100% 100% contain;
-        {% endspaceless%}"> 
-
-    <div class="column is-4 is-offset-8 is-pulled-left mt-xxl ">
+              ),
+              url('{{media.media.get_backdrop}}')  no-repeat center center ;
+              background-size:contain;
+        {% endspaceless%}">
+            <!-- img src="{{media.media.get_backdrop}}" alt=""-->
+        </div>
+    <div class="column is-4 is-pulled-left mt-xxl ">
          <a href="{% url 'detail' media.media.slug %}" class="">
             <h2 class="is-size-1 is-uppercase"> {{media.media.name}}</h2>
         </a>
-        <p class="content"> {{media.media.desc|truncatewords:50}} </p>
-        <button class="button is-large"> Play ultmo capitulo </button>
-        <button class="button is-large"> Detalles </button>
+        <p class="content mv-xl" > 
+            {{media.media.desc|truncatewords:50}} 
+        </p>
+        <button class="button is-large is-danger"> Play ultmo capitulo </button>
+        <button class="button is-large is-dark"> Detalles </button>
     </div>
-    </div>
+</div>
 
 
-<div class="container is-mobile">
+<div class="container is-mobile gray">
 
-    <h2 class="mt-xl is-size-3"> Ultimos agregados: </h2>
+    <h2 class="pt-xl is-size-2 has-text-black-ter has-text-weight-semibold"> Ultimos agregados: </h2>
+
+
+
 <div class="clearfix container is-mobile">
     {% include "_pager.html" %} 
 </div>
 
 
 
-<div class="columns  is-multiline mt-xl">
+<div class="columns  is-multiline mt-xl is-fluid">
     {% for obj in page_obj.object_list %}
     <div class="column  is-2">            
         <a href="{% url 'detail' obj.slug %}" class="is-white">
              {% thumbnail  obj.image '260x345' crop="center"  as img%}
-             <img src="{{img.url}}" alt="" class=" image has-shadow" > 
+             <img src="{{img.url}}" alt="" class=" image has-shadow mycenter" > 
              {% endthumbnail %}
-             <b class="is-size-7">{{ obj.name|upper}}</b><br>
-             <b class="is-size-7">{{obj.api.trakt.year}}</b>
         </a>
+                 <div class="has-text-centered">
+              <b class="is-size-7 ">{{ obj.name|upper}}</b><br>
+             <b class="is-size-7  has-text-grey">{{obj.api.trakt.year}}</b>
+                
+             </div>
     </div>
     {% endfor %}
 </div>
