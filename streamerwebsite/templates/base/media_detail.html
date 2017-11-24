@@ -6,7 +6,7 @@
 {% block content %}
 
 <style type="text/css" media="screen">
-    .gray {
+.gray {
         background: url("{{object.api.tmdb.backdrops|random}}");
         background-size:cover;
       background-repeat: no-repeat;
@@ -19,86 +19,85 @@
 
 </style>
 
-<div class="container">
+<div class="container gray">
 
-    <div class="columns ">
-        
+    <div class="columns pv-s">
+
           <div class=" column ">
-            <img src="{{object.image|default:"http://placehold.it/160x240"}}" class="ui centered medium image"/> 
+            <img src="{{object.image|default:"http://placehold.it/160x240"}}" class="mycenter image"/>
           </div>
 
           <div class=" column">
               <div class="box mt-xl">
-              
-              <h1 class="title">
-                {{ object.name }}  ( {{object.api.trakt.year}} )
-              </h1>  
-              <h2 class="subtitle">  {{object.get_type}}</h2>
-
-              <div class="ui raised segment ">
-                  <div class="ui horizontal header divider">
-                    <h3>Sipnosis</h3>
-                  </div>  
-                  <p>{{object.desc}}</p>
-                </div>
-                <div class="ui raised segment">
-                  <div class="ui columns mt-s">
-                  
-                 <div class="five wide column">
-                    <div class="ui red large statistic">
-                      <div class="value">
-                      {{object.api.trakt.rating|floatformat}}  
-                        <i class="thumbs up icon"></i>
+                  <h1 class="title">
+                    {{ object.name }}  ( {{object.api.trakt.year}} )
+                  </h1>
+                  <h2 class="subtitle">  {{object.get_type}}</h2>
+                   <div class="content">
+                            <h3>Sipnosis</h3>
+                          <p>{{object.desc}}</p>
                       </div>
-                      <div class="label">
-                        Calificación
+
+
+                  <nav class="level">
+                      <div class="level-item">
+                          <div>
+                            <p class="heading">
+
+                            Calificación
+                              </p>
+                            <p class="title">
+                          {{object.api.trakt.rating|floatformat}}
+
+                            </p>
+                          </div>
+                      </div>
+
+                  <div class="level-item">
+                      <div>
+                        <p class="heading">
+                            Votos
+                          </p>
+                          <p class="title">
+                          {{object.api.trakt.votes|floatformat}}
+                          </p>
                       </div>
                     </div>
-                  </div>
-                 <div class="five wide column">
-                    <div class="ui blue large statistic">
-                      <div class="value">
-                      {{object.api.trakt.votes|floatformat}}  
-                      </div>
-                      <div class="label">
-                        Votos
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="six wide column">
-                    <h3 class="ui dividing header">Generos</h3>
-                    <ul>
-                    {% for i in object.api.trakt.genres %}
+                    <div class=" is-clearfix">
+                             <ul>
+                        {% for i in object.api.trakt.genres %}
                     <li> {{i|capfirst}}</li>
                       {% endfor %}
                     </ul>
-                  </div>
-                  <div class="sixteen wide column">
-                    <h3 class="ui dividing header">Alias</h3>
-                    <ul>
+
+                    </div>
+                    <div class="level-item">
+                                      <ul>
                       {% for a in object.api.trakt.alias  %}
                       <li>
                           <i class="ui {{a.country}} flag" > </i> {{a.title}}
                       </li>
                       {% endfor %}
                     </ul>
-                  </div>
+
+                    </div>
+
+                </nav>
           </div>
 
-              </div>
-                 
-                </div>
+
           </div>
     </div>
+
+
+    {% comment %}
 
 
     {% if   object.api.tvdb.fanarts%}
     <!-- fan arts -->
         <div class=" box">
                   <div class="columns">
-                      <div class="sixteen wide column"> 
+                      <div class="sixteen wide column">
 
                         <div class="ui columns">
                         {% for p in object.api.tvdb.fanarts|slice:':8'  %}
@@ -141,7 +140,7 @@
 
     <div class="ui columns ">
           {% regroup object.entries.all|dictsortreversed:"season" by season as entries %}
-          
+
             {% for each_entry in  entries %}
                 <div class="ui horizontal header divider">
                     {% if object.type == 'ser' %}
@@ -149,23 +148,23 @@
                     {% else %}
                       <h3> Pelicula </h3>
                     {% endif %}
-                 </div>  
-                    <div class="ui stackable cards link ">          
+                 </div>
+                    <div class="ui stackable cards link ">
                     {% for  entry in each_entry.list %}
                             <div class=" ui card fullhref">
                                 <div class="image img-holder">
                                   <img src="{{entry.image|default:"http://placehold.it/150x110"}}" class="ui centered  image "/>
                                 </div>
-                                
+
                                   {% if object.type == 'ser' %}
                                   <div class="content center aligned ">
                                      E{{entry.episode|default:"001"}}xS{{entry.season|default:"001"}}
                                   </div>
                                   {% endif %}
-                                
+
                                   <div class="content center aligned">
                                     {% for re in entry.resources.all  %}
-                                      <a href="{% url 'view' object.slug re.id re.quality%}" class="ui red label" > 
+                                      <a href="{% url 'view' object.slug re.id re.quality%}" class="ui red label" >
                                         {{re.quality}}
                                       </a>
                                       {% endfor %}
@@ -178,7 +177,7 @@
 
           <div class="columns">
             <div class="nine wide column">
-              
+
                     <div class="ui minimal centered comments">
                     <h3 class="ui dividing header">Comentarios</h3>
                       {% for c in object.api.trakt.comments  %}
@@ -194,23 +193,23 @@
                                   {{c.text}}
                               </div>
                           </div>
-                      </div>      
+                      </div>
                       {% endfor %}
                     </div>
               </div>
             <div class="six wide column">
-                {% for i in object.api.tmdb.trailers%} 
+                {% for i in object.api.tmdb.trailers%}
                               {% video  i %}
                 {% endfor %}
 
-                
+
             </div>
             </div>
           </div>
         <div class="columns">
-        {% for i in object.api.tmdb.posters|slice:"0:6"%} 
+        {% for i in object.api.tmdb.posters|slice:"0:6"%}
                 <div class="ui five wide column">
-                    {% thumbnail i '360x530'  as i %} 
+                    {% thumbnail i '360x530'  as i %}
                     <img src="{{i.url}}" class="ui spaced image" alt="{{object.title}}">
                     {% endthumbnail%}
                 </div>
@@ -226,8 +225,9 @@
                 document.location.href=href;
             });
             });
-    
+
     </script>
 
+    {% endcomment %}
 
 {% endblock %}
