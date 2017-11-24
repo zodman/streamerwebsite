@@ -17,7 +17,7 @@ exports.plugins = {
             ignoreInitial: true,
             ignored: ['node_modules']
         },
-        files:["**/*.{scss,css,html,py}"],
+        files:["**/*.{html,py}", 'media/app/*.{js,css}'],
         proxy:'localhost:8000',
         reloadDebounce:3000,
        logLevel: "debug"

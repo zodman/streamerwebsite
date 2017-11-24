@@ -15,7 +15,7 @@ height:600px;
     background-color: white;
 }
 .gray {
-    background-color: #EFEFEF;
+     background-color: hsl(0, 0%, 96%);
 }
 
 .navbar {
